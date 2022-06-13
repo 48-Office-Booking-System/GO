@@ -28,3 +28,28 @@ type Office struct {
 	Photourl    string `json:"photourl"`
 	Number      string `json:"number"`
 }
+
+type role struct {
+	Id int `json:"id" gorm:"primaryKey"`
+	name string `json:"name"`
+}
+
+type type struct {
+	Id int `json:"id" gorm:"primaryKey"`
+	name string `json:"name"`
+}
+
+type tags struct {
+	Id int `json:"id" gorm:"primaryKey"`
+	name string `json:"name"`
+}
+
+type facillitations struct {
+	Id int `json:"id" gorm:"primaryKey"`
+	name string `json:"name"`
+}
+
+type status struct {
+	Id int `json:"id" gorm:"primaryKey"`
+	name string `json:"name"`
+}
