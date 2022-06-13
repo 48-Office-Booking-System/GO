@@ -1,9 +1,9 @@
 package model
 
-type Name struct {
-	ID     int `json:"id" gorm:"primaryKey"`
-	RoleID int
-	//Role Role `gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
+type User struct {
+	ID       int `json:"id" gorm:"primaryKey"`
+	RoleID   int
+	Role     Role   `gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
 	Name     string `json:"name"`
 	Email    string `json:"email"`
 	Password string `json:"password,omitempty"`
@@ -15,8 +15,8 @@ type Name struct {
 type Office struct {
 	ID        int `json:"id" gorm:"primaryKey"`
 	CreatedBy int
-	//CreatedBy User
-	TypeID int
+	User      User `gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
+	TypeID    int
 	//Role Role `gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
 	Name        string `json:"name"`
 	Description string `json:"description"`
@@ -29,27 +29,27 @@ type Office struct {
 	Number      string `json:"number"`
 }
 
-type role struct {
-	Id int `json:"id" gorm:"primaryKey"`
+type Role struct {
+	Id   int    `json:"id" gorm:"primaryKey"`
 	name string `json:"name"`
 }
 
-type type struct {
-	Id int `json:"id" gorm:"primaryKey"`
+type Type struct {
+	Id   int    `json:"id" gorm:"primaryKey"`
 	name string `json:"name"`
 }
 
-type tags struct {
-	Id int `json:"id" gorm:"primaryKey"`
+type Tags struct {
+	Id   int    `json:"id" gorm:"primaryKey"`
 	name string `json:"name"`
 }
 
-type facillitations struct {
-	Id int `json:"id" gorm:"primaryKey"`
+type Facillitations struct {
+	Id   int    `json:"id" gorm:"primaryKey"`
 	name string `json:"name"`
 }
 
-type status struct {
-	Id int `json:"id" gorm:"primaryKey"`
+type Status struct {
+	Id   int    `json:"id" gorm:"primaryKey"`
 	name string `json:"name"`
 }
