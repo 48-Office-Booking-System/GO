@@ -619,6 +619,34 @@ definitions:
     properties:
       id:
         type: "integer"
+      role:
+        $ref: "#/definitions/Role"
+      name:
+        type: "string"
+      email:
+        type: "string"
+      password:
+        type: "string"
+      photo_url:
+        type: "string"
+      number:
+        type: "string"
+        
+      # ganti jadi booking
+      tags:
+        type: "array"
+        xml:
+          name: "tag"
+          wrapped: true
+        items:
+          $ref: "#/definitions/Tag"
+    xml: 
+      name: "User"
+  UserLama:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
         format: "int64"
       username:
         type: "string"
@@ -637,7 +665,7 @@ definitions:
         format: "int32"
         description: "User Status"
     xml:
-      name: "User"
+      name: "UserLama"
   Role:
     type: "object"
     properties:

@@ -3,15 +3,15 @@ package model
 import "time"
 
 type User struct {
-	ID        int `json:"id" gorm:"primaryKey"`
-	RoleID    int
-	Role      Role      `json:"role" gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
-	Name      string    `json:"name"`
-	Email     string    `json:"email"`
-	Password  string    `json:"password,omitempty"`
-	PhotoUrls string    `json:"photo_url"`
-	Number    string    `json:"number"`
-	Bookings  []Booking `json:"bookings"`
+	ID       int `json:"id" gorm:"primaryKey"`
+	RoleID   int
+	Role     Role      `json:"role" gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
+	Name     string    `json:"name"`
+	Email    string    `json:"email"`
+	Password string    `json:"password,omitempty"`
+	PhotoUrl string    `json:"photo_url"`
+	Number   string    `json:"number"`
+	Bookings []Booking `json:"bookings"`
 }
 
 type Office struct {
