@@ -3,15 +3,15 @@ package model
 import "time"
 
 type User struct {
-	ID       int `json:"id" gorm:"primaryKey"`
-	RoleID   int
-	Role     Role      `json:"role" gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
-	Name     string    `json:"name"`
-	Email    string    `json:"email"`
-	Password string    `json:"password,omitempty"`
-	Photourl string    `json:"photourl"`
-	Number   string    `json:"number"`
-	Bookings []Booking `json:"bookings"`
+	ID        int `json:"id" gorm:"primaryKey"`
+	RoleID    int
+	Role      Role       `json:"role" gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
+	Name      string     `json:"name"`
+	Email     string     `json:"email"`
+	Password  string     `json:"password,omitempty"`
+	PhotoUrls []PhotoUrl `json:"photo_url"`
+	Number    string     `json:"number"`
+	Bookings  []Booking  `json:"bookings"`
 }
 
 type Office struct {
@@ -25,9 +25,9 @@ type Office struct {
 	Location      string         `json:"location"`
 	ViewCount     int            `json:"view_count"`
 	Price         int            `json:"price"`
-	KursiMin      int            `json:"kursi_min"`
-	KursiMax      int            `json:"kursi_max"`
-	Photourl      string         `json:"photourl"`
+	ChairMin      int            `json:"chair_min"`
+	ChairMax      int            `json:"chair_max"`
+	PhotoUrl      []PhotoUrl     `json:"photo_url"`
 	Number        string         `json:"number"`
 	Facilitations []Facilitation `json:"facilitations" gorm:"many2many:office_facilitations;constraint:OnUpdate:CASCADE,OnDelete:CASCADE"`
 	Tags          []Tag          `json:"tags" gorm:"many2many:office_tags;constraint:OnUpdate:CASCADE,OnDelete:CASCADE"`
@@ -69,4 +69,9 @@ type Facilitation struct {
 type Status struct {
 	ID   int    `json:"id" gorm:"primaryKey"`
 	Name string `json:"name"`
+}
+
+type PhotoUrl struct {
+	ID  int    `json:"id" gorm:"primaryKey"`
+	Url string `json:"url"`
 }
