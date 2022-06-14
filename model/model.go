@@ -5,13 +5,13 @@ import "time"
 type User struct {
 	ID        int `json:"id" gorm:"primaryKey"`
 	RoleID    int
-	Role      Role       `json:"role" gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
-	Name      string     `json:"name"`
-	Email     string     `json:"email"`
-	Password  string     `json:"password,omitempty"`
-	PhotoUrls []PhotoUrl `json:"photo_url" gorm:"foreignKey:PhotoID"`
-	Number    string     `json:"number"`
-	Bookings  []Booking  `json:"bookings"`
+	Role      Role      `json:"role" gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
+	Name      string    `json:"name"`
+	Email     string    `json:"email"`
+	Password  string    `json:"password,omitempty"`
+	PhotoUrls string    `json:"photo_url"`
+	Number    string    `json:"number"`
+	Bookings  []Booking `json:"bookings"`
 }
 
 type Office struct {
@@ -27,7 +27,7 @@ type Office struct {
 	Price         int            `json:"price"`
 	ChairMin      int            `json:"chair_min"`
 	ChairMax      int            `json:"chair_max"`
-	PhotoUrls     []PhotoUrl     `json:"photo_urls" gorm:"foreignKey:PhotoID"`
+	PhotoUrls     []PhotoUrl     `json:"photo_urls"`
 	Number        string         `json:"number"`
 	Facilitations []Facilitation `json:"facilitations" gorm:"many2many:office_facilitations;constraint:OnUpdate:CASCADE,OnDelete:CASCADE"`
 	Tags          []Tag          `json:"tags" gorm:"many2many:office_tags;constraint:OnUpdate:CASCADE,OnDelete:CASCADE"`
@@ -72,6 +72,6 @@ type Status struct {
 }
 
 type PhotoUrl struct {
-	Url     string `json:"url"`
-	PhotoID int    `json:"photo_id"`
+	Url      string `json:"url"`
+	OfficeID int
 }
