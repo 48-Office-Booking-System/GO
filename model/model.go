@@ -5,13 +5,13 @@ import "time"
 type User struct {
 	ID       int `json:"id" gorm:"primaryKey"`
 	RoleID   int
-	Role     Role   `json:"role" gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
-	Name     string `json:"name"`
-	Email    string `json:"email"`
-	Password string `json:"password,omitempty"`
-	Photourl string `json:"photourl"`
-	Number   string `json:"number"`
-	//Booking
+	Role     Role      `json:"role" gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
+	Name     string    `json:"name"`
+	Email    string    `json:"email"`
+	Password string    `json:"password,omitempty"`
+	Photourl string    `json:"photourl"`
+	Number   string    `json:"number"`
+	Bookings []Booking `json:"bookings"`
 }
 
 type Office struct {
@@ -36,9 +36,9 @@ type Office struct {
 type Booking struct {
 	ID              int `json:"id" gorm:"primaryKey"`
 	UserID          int
-	User            User `json:"user" gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
+	User            User `json:"user,omitempty" gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
 	OfficeID        int
-	Office          Office `json:"office" gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
+	Office          Office `json:"office,omitempty" gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
 	StatusID        int
 	Status          Status    `json:"status" gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
 	Start           time.Time `json:"start"`
