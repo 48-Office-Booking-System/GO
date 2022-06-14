@@ -1,0 +1,1031 @@
+openapi: 3.0.0
+
+info:
+  title:
+  descryption:
+  version:
+
+path:
+# ------------------------------------------------------------------------
+# -USER--USER--USER--USER--USER--USER--USER--USER--USER--USER--USER--USER-
+# ------------------------------------------------------------------------
+  '/api/login'
+    get:
+      summary: login endpoint
+      requestBody:
+        content:
+          aplication/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: username
+                password:
+                  type: string
+                  example: password
+      responses:
+        '200':
+          descryption: succces
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  message:
+                    type: string
+                    example: success
+                  rescode: 
+                    type: integer
+                    example: 200
+                  data:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+                        example: ajfjfbdfeugagfukajd
+        '402':
+          descryption: user failure
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  message:
+                    type: string
+                    example: bad request, user failure
+                  rescode: 
+                    type: integer
+                    example: 402     
+
+  '/api/register'
+
+  # lihat profile
+  '/api/profile/{id}':
+    get:
+    summary: this is get profile
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+    security:
+      - BearerAuth: []
+    tags:
+      - customer
+    responses:
+      '200':
+        descryption: succes response
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/succes200"
+                - type: object
+                  properties:
+                    data:
+                      type:
+                      properties:
+                        token:
+                          type: string
+                          example: kadfjldajfjdalfjlkjfafjkafjfaj
+        '402':
+          $ref: "#/components/responses/402badrequest"
+
+  # menampilkan seluruh user
+  '/api/users/all'
+    get:
+      summary: login endpoint
+      requestBody:
+        content:
+          aplication/json:
+            schema:
+              type: object
+              properties:
+                userid:
+                  type: integer
+                  example: 1
+                username:
+                  type: string
+                  example: name
+      responses:
+        '200':
+          descryption: succces
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  message:
+                    type: string
+                    example: success
+                  rescode: 
+                    type: integer
+                    example: 200
+                  # data:
+                  #   type: object
+                  #   properties:
+                  #     userData:
+                  #       type: 
+                  #       example: 
+        '402':
+          descryption: users failure
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  message:
+                    type: string
+                    example: bad request, user failure
+                  rescode: 
+                    type: integer
+                    example: 402  
+
+  # Belum tau untuk apa
+  '/api/users/'
+    post:
+      summary: login endpoint
+      requestBody:
+        content:
+          aplication/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: username
+                password:
+                  type: string
+                  example: password
+      responses:
+        '200':
+          descryption: succces
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  message:
+                    type: string
+                    example: success
+                  rescode: 
+                    type: integer
+                    example: 200
+                  data:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+                        example: ajfjfbdfeugagfukajd
+        '402':
+          descryption: user failure
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  message:
+                    type: string
+                    example: bad request, user failure
+                  rescode: 
+                    type: integer
+                    example: 402  
+
+  # halaman users
+  '/api/users/:id'
+    get:
+      summary: login endpoint
+      requestBody:
+        content:
+          aplication/json:
+            schema:
+              type: object
+              properties:
+                userid:
+                  type: integer
+                  example: 1
+                username:
+                  type: string
+                  example: name
+      responses:
+        '200':
+          descryption: succces
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  message:
+                    type: string
+                    example: success
+                  rescode: 
+                    type: integer
+                    example: 200
+                  data:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+                        example: ajfjfbdfeugagfukajd
+        '402':
+          descryption: user failure
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  message:
+                    type: string
+                    example: bad request, user failure
+                  rescode: 
+                    type: integer
+                    example: 402  
+
+  # ubah data user
+  '/api/users/:id'
+    post:
+      summary: login endpoint
+      requestBody:
+        content:
+          aplication/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: username
+                password:
+                  type: string
+                  example: password
+      responses:
+        '200':
+          descryption: succces
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  message:
+                    type: string
+                    example: success
+                  rescode: 
+                    type: integer
+                    example: 200
+                  data:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+                        example: ajfjfbdfeugagfukajd
+        '402':
+          descryption: user failure
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  message:
+                    type: string
+                    example: bad request, user failure
+                  rescode: 
+                    type: integer
+                    example: 402  
+
+  # hapus user
+  '/api/users/:id'
+    del:
+      summary: login endpoint
+      requestBody:
+        content:
+          aplication/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: username
+                password:
+                  type: string
+                  example: password
+      responses:
+        '200':
+          descryption: succces
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  message:
+                    type: string
+                    example: success
+                  rescode: 
+                    type: integer
+                    example: 200
+                  data:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+                        example: ajfjfbdfeugagfukajd
+        '402':
+          descryption: user failure
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  message:
+                    type: string
+                    example: bad request, user failure
+                  rescode: 
+                    type: integer
+                    example: 402  
+
+  # menampilkan bookingan
+  # '/api/users/:booking_id'
+  #   get:
+  #     summary: login endpoint
+  #     requestBody:
+  #       content:
+  #         aplication/json:
+  #           schema:
+  #             type: object
+  #             properties:
+  #               username:
+  #                 type: string
+  #                 example: username
+  #               password:
+  #                 type: string
+  #                 example: password
+  #     responses:
+  #       '200':
+  #         descryption: succces
+  #         content: 
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties: 
+  #                 message:
+  #                   type: string
+  #                   example: success
+  #                 rescode: 
+  #                   type: integer
+  #                   example: 200
+  #                 data:
+  #                   type: object
+  #                   properties:
+  #                     token:
+  #                       type: string
+  #                       example: ajfjfbdfeugagfukajd
+  #       '402':
+  #         descryption: user failure
+  #         content: 
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties: 
+  #                 message:
+  #                   type: string
+  #                   example: bad request, user failure
+  #                 rescode: 
+  #                   type: integer
+  #                   example: 402  
+
+# ------------------------------------------------------------------------
+# -OFFICE--OFFICE--OFFICE--OFFICE--OFFICE--OFFICE--OFFICE--OFFICE--OFFICE-
+# ------------------------------------------------------------------------
+  # menampilkan seluruh office
+  '/api/office/all'
+    get:
+      summary: login endpoint
+      requestBody:
+        content:
+          aplication/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: username
+                password:
+                  type: string
+                  example: password
+      responses:
+        '200':
+          descryption: succces
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  message:
+                    type: string
+                    example: success
+                  rescode: 
+                    type: integer
+                    example: 200
+                  data:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+                        example: ajfjfbdfeugagfukajd
+        '402':
+          descryption: user failure
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  message:
+                    type: string
+                    example: bad request, user failure
+                  rescode: 
+                    type: integer
+                    example: 402 
+
+  # menambahkan office baru
+  '/api/office'
+    post:
+      summary: login endpoint
+      requestBody:
+        content:
+          aplication/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: username
+                password:
+                  type: string
+                  example: password
+      responses:
+        '200':
+          descryption: succces
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  message:
+                    type: string
+                    example: success
+                  rescode: 
+                    type: integer
+                    example: 200
+                  data:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+                        example: ajfjfbdfeugagfukajd
+        '402':
+          descryption: user failure
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  message:
+                    type: string
+                    example: bad request, user failure
+                  rescode: 
+                    type: integer
+                    example: 402 
+
+  # melihat office tertentu
+  '/api/offices/:id'
+    get:
+      summary: login endpoint
+      requestBody:
+        content:
+          aplication/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: username
+                password:
+                  type: string
+                  example: password
+      responses:
+        '200':
+          descryption: succces
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  message:
+                    type: string
+                    example: success
+                  rescode: 
+                    type: integer
+                    example: 200
+                  data:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+                        example: ajfjfbdfeugagfukajd
+        '402':
+          descryption: user failure
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  message:
+                    type: string
+                    example: bad request, user failure
+                  rescode: 
+                    type: integer
+                    example: 402 
+
+  # mengubah office tertentu
+  '/api/offices/:id'
+    put:
+      summary: login endpoint
+      requestBody:
+        content:
+          aplication/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: username
+                password:
+                  type: string
+                  example: password
+      responses:
+        '200':
+          descryption: succces
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  message:
+                    type: string
+                    example: success
+                  rescode: 
+                    type: integer
+                    example: 200
+                  data:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+                        example: ajfjfbdfeugagfukajd
+        '402':
+          descryption: user failure
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  message:
+                    type: string
+                    example: bad request, user failure
+                  rescode: 
+                    type: integer
+                    example: 402 
+
+  # menghapus bookingan tertentu
+  '/api/offices/:id'
+    del:
+      summary: login endpoint
+      requestBody:
+        content:
+          aplication/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: username
+                password:
+                  type: string
+                  example: password
+      responses:
+        '200':
+          descryption: succces
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  message:
+                    type: string
+                    example: success
+                  rescode: 
+                    type: integer
+                    example: 200
+                  data:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+                        example: ajfjfbdfeugagfukajd
+        '402':
+          descryption: user failure
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  message:
+                    type: string
+                    example: bad request, user failure
+                  rescode: 
+                    type: integer
+                    example: 402 
+
+  # melihat office yang sudah dibooking
+  '/api/offices/:booking_id'
+    get:
+      summary: login endpoint
+      requestBody:
+        content:
+          aplication/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: username
+                password:
+                  type: string
+                  example: password
+      responses:
+        '200':
+          descryption: succces
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  message:
+                    type: string
+                    example: success
+                  rescode: 
+                    type: integer
+                    example: 200
+                  data:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+                        example: ajfjfbdfeugagfukajd
+        '402':
+          descryption: user failure
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  message:
+                    type: string
+                    example: bad request, user failure
+                  rescode: 
+                    type: integer
+                    example: 402
+
+  # menampilkan hasil pencarian office
+  '/api/offices/:id'
+    get:
+      summary: login endpoint
+      requestBody:
+        content:
+          aplication/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: username
+                password:
+                  type: string
+                  example: password
+      responses:
+        '200':
+          descryption: succces
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  message:
+                    type: string
+                    example: success
+                  rescode: 
+                    type: integer
+                    example: 200
+                  data:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+                        example: ajfjfbdfeugagfukajd
+        '402':
+          descryption: user failure
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  message:
+                    type: string
+                    example: bad request, user failure
+                  rescode: 
+                    type: integer
+                    example: 402
+
+# ------------------------------------------------------------------------
+# -BOOKING--BOOKING--BOOKING--BOOKING--BOOKING--BOOKING--BOOKING--BOOKING-
+# ------------------------------------------------------------------------
+  # menampilkan seluruh bookingan
+  '/api/bookings/all'
+    get:
+      summary: login endpoint
+      requestBody:
+        content:
+          aplication/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: username
+                password:
+                  type: string
+                  example: password
+      responses:
+        '200':
+          descryption: succces
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  message:
+                    type: string
+                    example: success
+                  rescode: 
+                    type: integer
+                    example: 200
+                  data:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+                        example: ajfjfbdfeugagfukajd
+        '402':
+          descryption: user failure
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  message:
+                    type: string
+                    example: bad request, user failure
+                  rescode: 
+                    type: integer
+                    example: 402  
+
+  # menambahkan jenis bookingan
+  '/api/bookings'
+    post:
+      summary: login endpoint
+      requestBody:
+        content:
+          aplication/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: username
+                password:
+                  type: string
+                  example: password
+      responses:
+        '200':
+          descryption: succces
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  message:
+                    type: string
+                    example: success
+                  rescode: 
+                    type: integer
+                    example: 200
+                  data:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+                        example: ajfjfbdfeugagfukajd
+        '402':
+          descryption: user failure
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  message:
+                    type: string
+                    example: bad request, user failure
+                  rescode: 
+                    type: integer
+                    example: 402 
+
+  # melihat bookingan tertentu
+  '/api/bookings/:id'
+    get:
+      summary: login endpoint
+      requestBody:
+        content:
+          aplication/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: username
+                password:
+                  type: string
+                  example: password
+      responses:
+        '200':
+          descryption: succces
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  message:
+                    type: string
+                    example: success
+                  rescode: 
+                    type: integer
+                    example: 200
+                  data:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+                        example: ajfjfbdfeugagfukajd
+        '402':
+          descryption: user failure
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  message:
+                    type: string
+                    example: bad request, user failure
+                  rescode: 
+                    type: integer
+                    example: 402 
+
+  # mengubah bookingan tertentu
+  '/api/bookings/:id'
+    put:
+      summary: login endpoint
+      requestBody:
+        content:
+          aplication/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: username
+                password:
+                  type: string
+                  example: password
+      responses:
+        '200':
+          descryption: succces
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  message:
+                    type: string
+                    example: success
+                  rescode: 
+                    type: integer
+                    example: 200
+                  data:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+                        example: ajfjfbdfeugagfukajd
+        '402':
+          descryption: user failure
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  message:
+                    type: string
+                    example: bad request, user failure
+                  rescode: 
+                    type: integer
+                    example: 402 
+
+  # menghapus bookingan tertentu
+  '/api/bookings/:id'
+    del:
+      summary: login endpoint
+      requestBody:
+        content:
+          aplication/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: username
+                password:
+                  type: string
+                  example: password
+      responses:
+        '200':
+          descryption: succces
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  message:
+                    type: string
+                    example: success
+                  rescode: 
+                    type: integer
+                    example: 200
+                  data:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+                        example: ajfjfbdfeugagfukajd
+        '402':
+          descryption: user failure
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties: 
+                  message:
+                    type: string
+                    example: bad request, user failure
+                  rescode: 
+                    type: integer
+                    example: 402 
+
+components:
+    schemas:
+      succes200:
+        type: object
+        properties:
+          message:
+            type: string
+            example: success
+          rescode:
+            type: number
+            example: 200
+    responsses:
+      402badrequest:
+        descryption: user failure
+          content:
+            appcation/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: bad request, user failure
+                  rescode:
+                    type: number
+                    example: 402
+    securitySchemes:
+      BearerAuth:
+        type: http
+        scheme: bearer
+        bearerFormat: JWT
