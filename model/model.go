@@ -9,7 +9,7 @@ type User struct {
 	Name      string     `json:"name"`
 	Email     string     `json:"email"`
 	Password  string     `json:"password,omitempty"`
-	PhotoUrls []PhotoUrl `json:"photo_url"`
+	PhotoUrls []PhotoUrl `json:"photo_url" gorm:"foreignKey:PhotoID"`
 	Number    string     `json:"number"`
 	Bookings  []Booking  `json:"bookings"`
 }
@@ -23,11 +23,11 @@ type Office struct {
 	Name          string         `json:"name"`
 	Description   string         `json:"description"`
 	Location      string         `json:"location"`
-	ViewCount     int            `json:"view_count"`
+	ViewCount     int            `json:"view_count" gorm:"default:0"`
 	Price         int            `json:"price"`
 	ChairMin      int            `json:"chair_min"`
 	ChairMax      int            `json:"chair_max"`
-	PhotoUrl      []PhotoUrl     `json:"photo_url"`
+	PhotoUrls     []PhotoUrl     `json:"photo_urls" gorm:"foreignKey:PhotoID"`
 	Number        string         `json:"number"`
 	Facilitations []Facilitation `json:"facilitations" gorm:"many2many:office_facilitations;constraint:OnUpdate:CASCADE,OnDelete:CASCADE"`
 	Tags          []Tag          `json:"tags" gorm:"many2many:office_tags;constraint:OnUpdate:CASCADE,OnDelete:CASCADE"`
@@ -72,6 +72,6 @@ type Status struct {
 }
 
 type PhotoUrl struct {
-	ID  int    `json:"id" gorm:"primaryKey"`
-	Url string `json:"url"`
+	Url     string `json:"url"`
+	PhotoID int    `json:"photo_id"`
 }
