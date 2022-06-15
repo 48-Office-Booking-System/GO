@@ -57,7 +57,7 @@ paths:
       responses:
         "405":
           description: "Invalid input"
-  /user/:id:
+  /user/{id}:
     get:
       tags:
         - "user"
@@ -163,7 +163,7 @@ paths:
       responses:
         "405":
           description: "Invalid input"
-  /office/:id:
+  /office/{id}:
     get:
       tags:
         - "office"
@@ -227,7 +227,7 @@ paths:
           description: "Invalid ID supplied"
         "404":
           description: "Office not found"
-  /bookiing/all:
+  /booking/all:
     get:
       tags:
         - "booking"
@@ -269,7 +269,7 @@ paths:
       responses:
         "405":
           description: "Invalid input"
-  /booking/:id:
+  /booking/{id}:
     get:
       tags:
         - "booking"
