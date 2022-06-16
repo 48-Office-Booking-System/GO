@@ -3,7 +3,6 @@ info:
   description: "This is a office booking systems"
   version: "1.0.0-beta"
   title: "KOBA Working Space"
-
 tags:
   - name: "user"
     description: "operation about user"
