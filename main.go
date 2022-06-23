@@ -13,6 +13,7 @@ func main() {
 	e := echo.New()
 
 	route.HealthAPI(e, conf)
+	route.RegisterUserGroupAPI(e, conf)
 
 	e.Logger.Fatal(e.Start(config.InitConfiguration().SERVER_ADDRESS))
 }
