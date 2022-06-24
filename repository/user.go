@@ -17,7 +17,7 @@ func (r *repoUser) CreateUser(user model.User) (id int, err error) {
 	return user.ID, nil
 }
 
-func NewRecipe(db *gorm.DB) domain.UserRepoAdapter {
+func NewUser(db *gorm.DB) domain.UserRepoAdapter {
 	return &repoUser{
 		DB: db,
 	}

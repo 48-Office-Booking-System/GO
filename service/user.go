@@ -15,7 +15,7 @@ func (rs *userService) CreateUserService(user model.User) (id int, err error) {
 	return rs.repo.CreateUser(user)
 }
 
-func NewServiceRepo(repo domain.UserRepoAdapter, conf config.Config) domain.ServiceAdapter {
+func NewUserService(repo domain.UserRepoAdapter, conf config.Config) domain.UserServiceAdapter {
 	return &userService{
 		repo: repo,
 		conf: conf,

@@ -2,6 +2,10 @@ package controller
 
 import "KOBA/domain"
 
-type ServiceController struct {
-	Sa domain.ServiceAdapter
+type UserServiceController struct {
+	UserServ domain.UserServiceAdapter
+}
+
+type BookingServiceController struct {
+	BookingServ domain.BookingServiceAdapter
 }

@@ -13,12 +13,12 @@ import (
 func RegisterUserGroupAPI(e *echo.Echo, conf config.Config) {
 	db := database.InitDB(conf)
 
-	repo := repository.NewRecipe(db)
+	repo := repository.NewUser(db)
 
-	svc := service.NewServiceRepo(repo, conf)
+	svc := service.NewUserService(repo, conf)
 
-	cont := controller.ServiceController{
-		Sa: svc,
+	cont := controller.UserServiceController{
+		UserServ: svc,
 	}
 
 	apiUser := e.Group("/user")

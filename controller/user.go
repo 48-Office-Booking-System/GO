@@ -7,11 +7,11 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-func (sc *ServiceController) CreateUserController(c echo.Context) error {
+func (sc *UserServiceController) CreateUserController(c echo.Context) error {
 	user := model.User{}
 	c.Bind(&user)
 
-	_, err := sc.Sa.CreateUserService(user)
+	_, err := sc.UserServ.CreateUserService(user)
 	if err != nil {
 		return c.JSONPretty(http.StatusInternalServerError, model.Response{
 			Code:    http.StatusInternalServerError,
