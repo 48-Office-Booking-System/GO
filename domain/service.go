@@ -12,4 +12,6 @@ type BookingServiceAdapter interface {
 	CreateBookingService(booking model.Booking) (id int, err error)
 	GetBookingsService() (bookings []model.Booking, err error)
 	GetBookingByIDService(id int) (booking model.Booking, err error)
+	UpdateBookingService(booking model.Booking, id int) error
+	DeleteBookingService(id int) error
 }

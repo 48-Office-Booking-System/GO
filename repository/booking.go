@@ -36,7 +36,7 @@ func (r *repoBooking) GetBookings() (bookings []model.Booking, err error) {
 	return bookings, nil
 }
 
-//Gett booking by id
+//Get booking by id
 func (r *repoBooking) GetBookingByID(id int) (booking model.Booking, err error) {
 	if err = r.DB.Debug().
 		Preload(clause.Associations).
@@ -48,6 +48,38 @@ func (r *repoBooking) GetBookingByID(id int) (booking model.Booking, err error) 
 	}
 
 	return booking, nil
+}
+
+//update booking
+func (r *repoBooking) UpdateBooking(booking model.Booking, id int) error {
+	booking.ID = id
+
+	res := r.DB.Debug().Save(&booking)
+	if res.RowsAffected < 1 {
+		return fmt.Errorf("error creating booking")
+	}
+
+	return nil
+}
+
+//delete booking
+func (r *repoBooking) DeleteBooking(id int) error {
+	booking := model.Booking{}
+	booking.ID = id
+
+	res := r.DB.Find(&booking)
+
+	if res.RowsAffected < 1 {
+		return fmt.Errorf("booking not found")
+	}
+
+	err := r.DB.Debug().Unscoped().Delete(&booking).Error
+
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func NewBooking(db *gorm.DB) domain.BookingRepoAdapter {

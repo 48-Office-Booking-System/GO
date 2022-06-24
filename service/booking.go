@@ -23,6 +23,14 @@ func (rs *bookingService) GetBookingByIDService(id int) (booking model.Booking, 
 	return rs.repo.GetBookingByID(id)
 }
 
+func (rs *bookingService) UpdateBookingService(booking model.Booking, id int) error {
+	return rs.repo.UpdateBooking(booking, id)
+}
+
+func (rs *bookingService) DeleteBookingService(id int) error {
+	return rs.repo.DeleteBooking(id)
+}
+
 func NewBookingService(repo domain.BookingRepoAdapter, conf config.Config) domain.BookingServiceAdapter {
 	return &bookingService{
 		repo: repo,
