@@ -12,12 +12,13 @@ type User struct {
 	PhotoUrl string    `json:"photo_url"`
 	Number   string    `json:"number"`
 	Bookings []Booking `json:"bookings"`
+	//Reviews  []Review  `json:"reviews"`
 }
 
 type Office struct {
-	ID            int `json:"id" gorm:"primaryKey"`
-	CreatedBy     int
-	User          User `json:"created_by" gorm:"foreignKey:CreatedBy;constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
+	ID int `json:"id" gorm:"primaryKey"`
+	// CreatedBy     int
+	// User          User `json:"created_by" gorm:"foreignKey:CreatedBy;constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
 	TypeID        int
 	Type          Type           `json:"type" gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
 	Name          string         `json:"name"`
@@ -31,6 +32,7 @@ type Office struct {
 	Number        string         `json:"number"`
 	Facilitations []Facilitation `json:"facilitations" gorm:"many2many:office_facilitations;constraint:OnUpdate:CASCADE,OnDelete:CASCADE"`
 	Tags          []Tag          `json:"tags" gorm:"many2many:office_tags;constraint:OnUpdate:CASCADE,OnDelete:CASCADE"`
+	//	Reviews       []Review       `json:"reviews"`
 }
 
 type Booking struct {
@@ -74,4 +76,16 @@ type Status struct {
 type PhotoUrl struct {
 	Url      string `json:"url"`
 	OfficeID int
+}
+
+/*
+type Review struct {
+	Text string `json:"text"`
+	Star int    `json:"star"`
+}
+*/
+
+type CreatedBy struct {
+	OfficeID int
+	UserID   int
 }
