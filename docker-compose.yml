@@ -8,7 +8,7 @@ services:
         MYSQL_ROOT_PASSWORD : kelompok48
         MYSQL_DATABASE: koba-test
       
-  be_bimo_app:
+  koba_api:
     image: "harutouko/koba-api:3.0"
     restart: always
     environment:

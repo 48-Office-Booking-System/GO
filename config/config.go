@@ -18,7 +18,7 @@ func InitConfiguration() Config {
 	return Config{
 		SERVER_ADDRESS: GetOrDefault("SERVER_ADDRESS", "0.0.0.0:8888"),
 		DB_USERNAME:    GetOrDefault("DB_USERNAME", "root"),
-		DB_PASSWORD:    GetOrDefault("DB_PASSWORD", ""),
+		DB_PASSWORD:    GetOrDefault("DB_PASSWORD", "kelompok48"),
 		DB_NAME:        GetOrDefault("DB_NAME", "koba-test"),
 		DB_PORT:        GetOrDefault("DB_PORT", "3306"),
 		DB_HOST:        GetOrDefault("DB_HOST", "localhost"),
