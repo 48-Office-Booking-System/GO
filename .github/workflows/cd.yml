@@ -35,4 +35,4 @@ jobs:
           key: ${{ secrets.AWS_KEY }}
           port: ${{ secrets.AWS_PORT }}
           script: |
-            docker run -e DB_HOST="0.0.0.0" --name koba --detach harutouko/koba-api:latest
+            docker run -e DB_HOST="0.0.0.0" --name koba
