@@ -6,6 +6,8 @@ import (
 
 type UserRepoAdapter interface {
 	CreateUser(user model.User) (id int, err error)
+	GetUsers() (users []model.User, err error)
+	GetUserByID(id int) (user model.User, err error)
 	UpdateUser(user model.User, id int) error
 	DeleteUser(id int) error
 }

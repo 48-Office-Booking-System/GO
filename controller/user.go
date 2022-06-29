@@ -28,6 +28,44 @@ func (sc *UserServiceController) CreateUserController(c echo.Context) error {
 	}, "\t")
 }
 
+func (sc *UserServiceController) GetUsersController(c echo.Context) error {
+	users, err := sc.UserServ.GetUsersService()
+
+	if err != nil {
+		return c.JSONPretty(http.StatusInternalServerError, model.Response{
+			Code:    http.StatusInternalServerError,
+			Message: err.Error(),
+			Data:    nil,
+		}, "\t")
+	}
+
+	return c.JSONPretty(http.StatusOK, model.Response{
+		Code:    http.StatusOK,
+		Message: "success getting users",
+		Data:    users,
+	}, "\t")
+}
+
+func (sc *UserServiceController) GetUserByIDController(c echo.Context) error {
+	id := c.Param("id")
+	intID, _ := strconv.ParseInt(id, 10, 64)
+	user, err := sc.UserServ.GetUserByIDService(int(intID))
+
+	if err != nil {
+		return c.JSONPretty(http.StatusInternalServerError, model.Response{
+			Code:    http.StatusInternalServerError,
+			Message: err.Error(),
+			Data:    nil,
+		}, "\t")
+	}
+
+	return c.JSONPretty(http.StatusOK, model.Response{
+		Code:    http.StatusOK,
+		Message: "success getting user",
+		Data:    user,
+	}, "\t")
+}
+
 func (sc *UserServiceController) UpdateUserController(c echo.Context) error {
 	id := c.Param("id")
 	intID, _ := strconv.ParseInt(id, 10, 64)

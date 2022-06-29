@@ -6,6 +6,7 @@ import (
 	"fmt"
 
 	"gorm.io/gorm"
+	"gorm.io/gorm/clause"
 )
 
 func (r *repoUser) CreateUser(user model.User) (id int, err error) {
@@ -15,6 +16,32 @@ func (r *repoUser) CreateUser(user model.User) (id int, err error) {
 	}
 
 	return user.ID, nil
+}
+
+func (r *repoUser) GetUsers() (users []model.User, err error) {
+	if err = r.DB.Debug().
+		Preload(clause.Associations).
+		Find(&users).
+		Error; err != nil {
+
+		return []model.User{}, err
+
+	}
+
+	return users, nil
+}
+
+func (r *repoUser) GetUserByID(id int) (user model.User, err error) {
+	if err = r.DB.Debug().
+		Preload(clause.Associations).
+		First(&user, id).
+		Error; err != nil {
+
+		return model.User{}, err
+
+	}
+
+	return user, nil
 }
 
 func (r *repoUser) UpdateUser(user model.User, id int) error {
