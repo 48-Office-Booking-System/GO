@@ -9,12 +9,13 @@ import (
 	"gorm.io/gorm/clause"
 )
 
-type name struct {
-}
-
 //create booking
 func (r *repoBooking) CreateBooking(booking model.Booking) (id int, err error) {
-	res := r.DB.Debug().Save(&booking)
+	booking.UserID = booking.User.ID
+	booking.OfficeID = booking.Office.ID
+	booking.StatusID = booking.Status.ID
+
+	res := r.DB.Debug().Omit(clause.Associations).Save(&booking)
 	if res.RowsAffected < 1 {
 		return 0, fmt.Errorf("error creating booking")
 	}
@@ -53,8 +54,11 @@ func (r *repoBooking) GetBookingByID(id int) (booking model.Booking, err error) 
 //update booking
 func (r *repoBooking) UpdateBooking(booking model.Booking, id int) error {
 	booking.ID = id
+	booking.UserID = booking.User.ID
+	booking.OfficeID = booking.Office.ID
+	booking.StatusID = booking.Status.ID
 
-	res := r.DB.Debug().Save(&booking)
+	res := r.DB.Debug().Omit(clause.Associations).Save(&booking)
 	if res.RowsAffected < 1 {
 		return fmt.Errorf("error creating booking")
 	}
@@ -73,7 +77,7 @@ func (r *repoBooking) DeleteBooking(id int) error {
 		return fmt.Errorf("booking not found")
 	}
 
-	err := r.DB.Debug().Unscoped().Delete(&booking).Error
+	err := r.DB.Debug().Omit(clause.Associations).Unscoped().Delete(&booking).Error
 
 	if err != nil {
 		return err
