@@ -7,7 +7,10 @@ services:
       environment:
         MYSQL_ROOT_PASSWORD : kelompok48
         MYSQL_DATABASE: koba-test
-      
+      healthcheck:
+        test: ["CMD", "mysql", "-u", "root",  "-pkelompok48", "-e", "show schemas"]
+        interval: 10s
+
   koba_api:
     image: "harutouko/koba-api:3.0"
     restart: always
@@ -16,3 +19,6 @@ services:
       DB_HOST: "db"
     ports:
       - "80:8149"
+    depends_on:
+      db:
+        condition: service_healthy
