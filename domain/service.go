@@ -15,3 +15,11 @@ type BookingServiceAdapter interface {
 	UpdateBookingService(booking model.Booking, id int) error
 	DeleteBookingService(id int) error
 }
+
+type OfficeServiceAdapter interface {
+	CreateOfficeService(office model.Office) (id int, err error)
+	GetAllOfficeService() (office []model.Office, err error)
+	GetOfficeService(id int) (office model.Office, err error)
+	UpdateOfficeService(office model.Office, id int) error
+	DeleteOfficeService(id int) error
+}

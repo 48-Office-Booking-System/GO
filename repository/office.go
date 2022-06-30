@@ -34,7 +34,7 @@ func (r *repoOffice) GetAllOffice() (office []model.Office, err error) {
 }
 
 // lihat gedung tertentu berdasarkan id
-func (r *repoOffice) GetOfficeByID(id int) (office model.Office, err error) {
+func (r *repoOffice) GetOffice(id int) (office model.Office, err error) {
 	if err = r.DB.Debug().
 		Preload(clause.Associations).
 		First(&office, id).

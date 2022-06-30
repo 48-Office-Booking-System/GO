@@ -19,7 +19,7 @@ type BookingRepoAdapter interface {
 type OfficeRepoAdapter interface {
 	CreateOffice(office model.Office) (id int, err error)
 	GetAllOffice() (office []model.Office, err error)
-	GetOfficeByID(id int) (office model.Office, err error)
+	GetOffice(id int) (office model.Office, err error)
 	UpdateOffice(office model.Office, id int) error
 	DeleteOffice(id int) error
 }
