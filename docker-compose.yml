@@ -2,6 +2,7 @@ version: "2.1"
 services:
   db:
       image: "mysql:latest"
+      restart: always
       ports:
         - "3306:3306"
       environment:
@@ -12,7 +13,7 @@ services:
         interval: 10s
 
   koba_api:
-    image: "harutouko/koba-api:3.0"
+    image: "harutouko/koba-api:3.0.1"
     restart: always
     environment:
       SERVER_ADDRESS: "0.0.0.0:8149"
