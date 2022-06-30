@@ -15,7 +15,7 @@ func (r *repoBooking) CreateBooking(booking model.Booking) (id int, err error) {
 	booking.OfficeID = booking.Office.ID
 	booking.StatusID = booking.Status.ID
 
-	res := r.DB.Debug().Omit(clause.Associations).Save(&booking)
+	res := r.DB.Debug().Omit(clause.Associations, "ID").Save(&booking)
 	if res.RowsAffected < 1 {
 		return 0, fmt.Errorf("error creating booking")
 	}
