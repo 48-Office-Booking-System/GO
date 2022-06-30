@@ -8,6 +8,8 @@ services:
       environment:
         MYSQL_ROOT_PASSWORD : kelompok48
         MYSQL_DATABASE: koba-test
+      volumes:
+        - kobavolume:/var/lib/mysql
       healthcheck:
         test: ["CMD", "mysql", "-u", "root",  "-pkelompok48", "-e", "show schemas"]
         interval: 10s
@@ -23,3 +25,6 @@ services:
     depends_on:
       db:
         condition: service_healthy
+
+volumes:
+  kobavolume:
