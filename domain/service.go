@@ -6,6 +6,10 @@ import (
 
 type UserServiceAdapter interface {
 	CreateUserService(user model.User) (id int, err error)
+	GetUsersService() (users []model.User, err error)
+	GetUserByIDService(id int) (user model.User, err error)
+	UpdateUserService(user model.User, id int) error
+	DeleteUserService(id int) error
 }
 
 type BookingServiceAdapter interface {
