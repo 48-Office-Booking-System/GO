@@ -1,6 +1,6 @@
 FROM golang:1.17
 
-RUN mkdir/app
+RUN mkdir /app
 
 WORKDIR /app
 
