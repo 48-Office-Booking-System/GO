@@ -15,7 +15,7 @@ services:
         interval: 10s
 
   koba_api:
-    image: "harutouko/koba-api:3.0.1"
+    build: .
     restart: always
     environment:
       SERVER_ADDRESS: "0.0.0.0:8149"

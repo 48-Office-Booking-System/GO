@@ -1,17 +1,15 @@
-#build stage
-FROM golang:1.18 AS builder
+FROM golang:1.17
+
+RUN mkdir/app
 
 WORKDIR /app
 
-COPY . .
+COPY go.mod /app
+COPY go.sum /app
+RUN go mod download
 
-RUN go build -tags netgo -o main.app
+ADD . /app
 
-#final stage
-FROM alpine:latest
+RUN go build -o main .
 
-WORKDIR /release
-
-COPY --from=builder /app/main.app .
-
-CMD [ "/release/main.app" ]
+CMD ["/app/main"]
