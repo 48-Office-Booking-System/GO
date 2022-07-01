@@ -35,7 +35,7 @@ jobs:
           key: ${{ secrets.AWS_KEY }}
           port: ${{ secrets.AWS_PORT }}
           script: |
-            docker stop koba
-            docker container rm koba
-            docker pull harutouko/koba-api:latest
-            docker run -e DB_HOST="0.0.0.0" -p 80:8888 --name koba --detach harutouko/koba-api:latest
+            cd GO
+            git checkout development
+            git pull origin development
+            docker-compose down && docker-compose up --build -d
