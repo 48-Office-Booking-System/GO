@@ -9,3 +9,7 @@ type UserServiceController struct {
 type BookingServiceController struct {
 	BookingServ domain.BookingServiceAdapter
 }
+
+type OfficeServiceController struct {
+	OfficeServ domain.OfficeServiceAdapter
+}
