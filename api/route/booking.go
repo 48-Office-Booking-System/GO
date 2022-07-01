@@ -26,4 +26,6 @@ func RegisterBookingGroupAPI(e *echo.Echo, conf config.Config) {
 	apiBooking.POST("", cont.CreateBookingController)
 	apiBooking.GET("/all", cont.GetBookingsController)
 	apiBooking.GET("/:id", cont.GetBookingByIDController)
+	apiBooking.PUT("/:id", cont.UpdateBookingController)
+	apiBooking.DELETE("/:id", cont.DeleteBookingController)
 }

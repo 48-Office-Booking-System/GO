@@ -2,17 +2,20 @@ version: "2.1"
 services:
   db:
       image: "mysql:latest"
+      restart: always
       ports:
         - "3306:3306"
       environment:
         MYSQL_ROOT_PASSWORD : kelompok48
         MYSQL_DATABASE: koba-test
+      volumes:
+        - kobavolume:/var/lib/mysql
       healthcheck:
         test: ["CMD", "mysql", "-u", "root",  "-pkelompok48", "-e", "show schemas"]
         interval: 10s
 
   koba_api:
-    image: "harutouko/koba-api:3.0"
+    build: .
     restart: always
     environment:
       SERVER_ADDRESS: "0.0.0.0:8149"
@@ -22,3 +25,6 @@ services:
     depends_on:
       db:
         condition: service_healthy
+
+volumes:
+  kobavolume:

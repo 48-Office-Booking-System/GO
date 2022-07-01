@@ -24,4 +24,8 @@ func RegisterUserGroupAPI(e *echo.Echo, conf config.Config) {
 	apiUser := e.Group("/user")
 
 	apiUser.POST("", cont.CreateUserController)
+	apiUser.GET("/all", cont.GetUsersController)
+	apiUser.GET("/:id", cont.GetUserByIDController)
+	apiUser.PUT("/:id", cont.UpdateUserController)
+	apiUser.DELETE("/:id", cont.DeleteUserController)
 }
