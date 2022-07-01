@@ -6,10 +6,14 @@ import (
 
 type UserRepoAdapter interface {
 	CreateUser(user model.User) (id int, err error)
+	GetUsers() (users []model.User, err error)
+	GetUserByID(id int) (user model.User, err error)
+	UpdateUser(user model.User, id int) error
+	DeleteUser(id int) error
 }
 
 type BookingRepoAdapter interface {
-	CreateBooking(booking model.Booking) (id int, err error)
+	CreateBookingService(booking model.Booking) (id int, err error)
 	GetBookings() (bookings []model.Booking, err error)
 	GetBookingByID(id int) (booking model.Booking, err error)
 	UpdateBooking(booking model.Booking, id int) error

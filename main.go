@@ -14,7 +14,6 @@ func main() {
 
 	route.HealthAPI(e, conf)
 	route.RegisterUserGroupAPI(e, conf)
-	route.RegisterBookingGroupAPI(e, conf)
 
 	e.Logger.Fatal(e.Start(config.InitConfiguration().SERVER_ADDRESS))
 }
