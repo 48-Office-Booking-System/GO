@@ -10,7 +10,7 @@ import (
 )
 
 func (r *repoUser) CreateUser(user model.User) (id int, err error) {
-	res := r.DB.Debug().Save(&user)
+	res := r.DB.Debug().Create(&user)
 	if res.RowsAffected < 1 {
 		return 0, fmt.Errorf("error creating user")
 	}
@@ -65,7 +65,7 @@ func (r *repoUser) DeleteUser(id int) error {
 		return fmt.Errorf("user not found")
 	}
 
-	err := r.DB.Debug().Unscoped().Delete(&user).Error
+	err := r.DB.Debug().Omit(clause.Associations).Unscoped().Delete(&user).Error
 
 	if err != nil {
 		return err

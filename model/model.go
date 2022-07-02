@@ -4,7 +4,7 @@ import "time"
 
 type User struct {
 	ID       int `json:"id" gorm:"primaryKey"`
-	RoleID   int
+	RoleID   int `json:"role_id,omitempty"`
 	Role     Role      `json:"role" gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
 	Name     string    `json:"name"`
 	Email    string    `json:"email"`
@@ -19,7 +19,7 @@ type Office struct {
 	ID int `json:"id" gorm:"primaryKey"`
 	// CreatedBy     int
 	// User          User `json:"created_by" gorm:"foreignKey:CreatedBy;constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
-	TypeID        int
+	TypeID        int `json:"type_id,omitempty"`
 	Type          Type           `json:"type" gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
 	Name          string         `json:"name"`
 	Description   string         `json:"description"`
@@ -37,11 +37,11 @@ type Office struct {
 
 type Booking struct {
 	ID              int `json:"id" gorm:"primaryKey"`
-	UserID          int
+	UserID          int `json:"user_id,omitempty"`
 	User            User `json:"user,omitempty" gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
-	OfficeID        int
+	OfficeID        int `json:"office_id,omitempty"`
 	Office          Office `json:"office,omitempty" gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
-	StatusID        int
+	StatusID        int `json:"status_id,omitempty"`
 	Status          Status    `json:"status" gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
 	Start           time.Time `json:"start"`
 	End             time.Time `json:"end"`
@@ -75,7 +75,7 @@ type Status struct {
 
 type PhotoUrl struct {
 	Url      string `json:"url"`
-	OfficeID int
+	OfficeID int `json:"office_id"`
 }
 
 /*
