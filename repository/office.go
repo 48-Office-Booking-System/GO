@@ -11,25 +11,25 @@ import (
 
 // tambah
 func (r *repoOffice) CreateOffice(office model.Office) (id int, err error) {
-	res := r.DB.Debug().Save(&office)
+	res := r.DB.Debug().Create(&office)
 	if res.RowsAffected < 1 {
 		return 0, fmt.Errorf("error creating user")
 	}
-	
+
 	return office.ID, nil
 }
 
-// lihat semua gedung 
+// lihat semua gedung
 func (r *repoOffice) GetAllOffice() (office []model.Office, err error) {
 	if err = r.DB.Debug().
-	Preload(clause.Associations).
-	Find(&office).
-	Error; err != nil {
-		
+		Preload(clause.Associations).
+		Find(&office).
+		Error; err != nil {
+
 		return []model.Office{}, err
-		
+
 	}
-	
+
 	return office, nil
 }
 

@@ -45,7 +45,7 @@ func (r *repoUser) GetUserByID(id int) (user model.User, err error) {
 }
 
 func (r *repoUser) UpdateUser(user model.User, id int) error {
-	res := r.DB.Debug().Where("id = ?", id).UpdateColumns(&user)
+	res := r.DB.Debug().Where("id = ?", id).Omit("Bookings").UpdateColumns(&user)
 	if res.RowsAffected < 1 {
 		return fmt.Errorf("error updating user")
 	}
