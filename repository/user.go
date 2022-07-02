@@ -10,7 +10,7 @@ import (
 )
 
 func (r *repoUser) CreateUser(user model.User) (id int, err error) {
-	res := r.DB.Debug().Create(&user)
+	res := r.DB.Debug().Omit("Booking").Create(&user)
 	if res.RowsAffected < 1 {
 		return 0, fmt.Errorf("error creating user")
 	}
