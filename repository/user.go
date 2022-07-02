@@ -48,7 +48,7 @@ func (r *repoUser) UpdateUser(user model.User, id int) error {
 	temp := model.User{}
 	temp.ID = id
 
-	r.DB.Debug().Save(&temp)
+	r.DB.Debug().First(&temp)
 	temp = user
 
 	res := r.DB.Debug().Save(&temp)
