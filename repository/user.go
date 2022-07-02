@@ -49,7 +49,7 @@ func (r *repoUser) UpdateUser(user model.User, id int) error {
 
 	res := r.DB.Debug().Save(&user)
 	if res.RowsAffected < 1 {
-		return fmt.Errorf("error creating user")
+		return fmt.Errorf("error updating user : " + res.err)
 	}
 
 	return nil
