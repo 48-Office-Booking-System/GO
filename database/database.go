@@ -25,7 +25,7 @@ func InitDB(conf config.Config) *gorm.DB {
 		fmt.Println("error opening connection : ", err)
 	}
 
-	err = DB.AutoMigrate(
+	err = DB.Debug().AutoMigrate(
 		&model.User{},
 		&model.Office{},
 		&model.Booking{},

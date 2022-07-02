@@ -45,13 +45,7 @@ func (r *repoUser) GetUserByID(id int) (user model.User, err error) {
 }
 
 func (r *repoUser) UpdateUser(user model.User, id int) error {
-	temp := model.User{}
-	temp.ID = id
-
-	r.DB.Debug().First(&temp)
-	temp = user
-
-	res := r.DB.Debug().Save(&temp)
+	res := r.DB.Debug().Where("id = ?", id).UpdateColumns(&user)
 	if res.RowsAffected < 1 {
 		return fmt.Errorf("error updating user")
 	}

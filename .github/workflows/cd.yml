@@ -2,7 +2,7 @@ name: Continuous Delivery
 
 on:
   push:
-    branches: [ ario ]
+    branches: [ main ]
 
 jobs:
   docker:
@@ -36,6 +36,6 @@ jobs:
           port: ${{ secrets.AWS_PORT }}
           script: |
             cd GO
-            git checkout development
-            git pull origin development
+            git checkout main
+            git pull origin main
             docker-compose down && docker-compose up --build -d
