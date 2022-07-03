@@ -10,7 +10,7 @@ import (
 )
 
 func (r *repoUser) CreateUser(user model.User) (id int, err error) {
-	res := r.DB.Debug().Omit("Booking").Create(&user)
+	res := r.DB.Debug().Omit(clause.Associations).Create(&user)
 	if res.RowsAffected < 1 {
 		return 0, fmt.Errorf("error creating user")
 	}
@@ -45,7 +45,7 @@ func (r *repoUser) GetUserByID(id int) (user model.User, err error) {
 }
 
 func (r *repoUser) UpdateUser(user model.User, id int) error {
-	res := r.DB.Debug().Where("id = ?", id).Omit("Bookings").UpdateColumns(&user)
+	res := r.DB.Debug().Where("id = ?", id).Omit(clause.Associations).UpdateColumns(&user)
 	if res.RowsAffected < 1 {
 		return fmt.Errorf("error updating user")
 	}
@@ -63,7 +63,7 @@ func (r *repoUser) DeleteUser(id int) error {
 		return fmt.Errorf("user not found")
 	}
 
-	err := r.DB.Debug().Omit(clause.Associations).Unscoped().Delete(&user).Error
+	err := r.DB.Debug().Omit("Role").Unscoped().Delete(&user).Error
 
 	if err != nil {
 		return err

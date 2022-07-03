@@ -13,7 +13,7 @@ import (
 func (r *repoOffice) CreateOffice(office model.Office) (id int, err error) {
 	res := r.DB.Debug().Create(&office)
 	if res.RowsAffected < 1 {
-		return 0, fmt.Errorf("error creating user")
+		return 0, fmt.Errorf("error creating office")
 	}
 
 	return office.ID, nil
@@ -49,11 +49,9 @@ func (r *repoOffice) GetOffice(id int) (office model.Office, err error) {
 
 // update gedung berdasarkan id
 func (r *repoOffice) UpdateOffice(office model.Office, id int) error {
-	office.ID = id
-
-	res := r.DB.Debug().Save(&office)
+	res := r.DB.Debug().Where("id = ?", id).Omit(clause.Associations).UpdateColumns(&office)
 	if res.RowsAffected < 1 {
-		return fmt.Errorf("error creating office")
+		return fmt.Errorf("error updating office")
 	}
 
 	return nil
@@ -70,7 +68,7 @@ func (r *repoOffice) DeleteOffice(id int) error {
 		return fmt.Errorf("office not found")
 	}
 
-	err := r.DB.Debug().Unscoped().Delete(&office).Error
+	err := r.DB.Debug().Omit("Type").Unscoped().Delete(&office).Error
 
 	if err != nil {
 		return err
