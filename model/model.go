@@ -23,7 +23,8 @@ type Office struct {
 	Type          Type           `json:"type" gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
 	Name          string         `json:"name"`
 	Description   string         `json:"description"`
-	Location      string         `json:"location"`
+	Latitude      string         `json:"latitude"`
+	Longitude      string         `json:"longitude"`
 	ViewCount     int            `json:"view_count" gorm:"default:0"`
 	Price         int            `json:"price"`
 	ChairMin      int            `json:"chair_min"`
