@@ -11,7 +11,7 @@ import (
 
 //create booking
 func (r *repoBooking) CreateBooking(booking model.Booking) (id int, err error) {
-	res := r.DB.Debug().Omit("User", "Office", "ID").Create(&booking)
+	res := r.DB.Debug().Omit("User", "Office").Create(&booking)
 	if res.RowsAffected < 1 {
 		return 0, fmt.Errorf("error creating booking")
 	}
