@@ -11,11 +11,7 @@ import (
 
 //create booking
 func (r *repoBooking) CreateBooking(booking model.Booking) (id int, err error) {
-	/* booking.UserID = booking.User.ID
-	booking.OfficeID = booking.Office.ID
-	booking.StatusID = booking.Status.ID
- */
-	res := r.DB.Debug().Omit(clause.Associations, "ID").Save(&booking)
+	res := r.DB.Debug().Omit("User", "Office", "ID").Create(&booking)
 	if res.RowsAffected < 1 {
 		return 0, fmt.Errorf("error creating booking")
 	}
@@ -54,13 +50,10 @@ func (r *repoBooking) GetBookingByID(id int) (booking model.Booking, err error) 
 //update booking
 func (r *repoBooking) UpdateBooking(booking model.Booking, id int) error {
 	booking.ID = id
-	/* booking.UserID = booking.User.ID
-	booking.OfficeID = booking.Office.ID
-	booking.StatusID = booking.Status.ID */
 
-	res := r.DB.Debug().Omit(clause.Associations).Save(&booking)
+	res := r.DB.Debug().Where("id = ?", id).Omit(clause.Associations).UpdateColumns(&booking)
 	if res.RowsAffected < 1 {
-		return fmt.Errorf("error creating booking")
+		return fmt.Errorf("error updating booking")
 	}
 
 	return nil

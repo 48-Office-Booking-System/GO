@@ -12,7 +12,7 @@ import (
 // tambah
 func (r *repoOffice) CreateOffice(office model.Office) (id int, err error) {
 	office.ViewCount = 0
-	res := r.DB.Debug().Omit("ViewCount").Create(&office)
+	res := r.DB.Debug().Create(&office)
 	if res.RowsAffected < 1 {
 		return 0, fmt.Errorf("error creating office")
 	}
