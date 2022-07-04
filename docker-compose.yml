@@ -21,7 +21,7 @@ services:
       SERVER_ADDRESS: "0.0.0.0:8149"
       DB_HOST: "db"
     ports:
-      - "80:8149"
+      - "443:8149"
     depends_on:
       db:
         condition: service_healthy
