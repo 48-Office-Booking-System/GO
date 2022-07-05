@@ -15,3 +15,7 @@ type repoBooking struct {
 type repoOffice struct {
 	DB *gorm.DB
 }
+
+type repoReview struct {
+	DB *gorm.DB
+}

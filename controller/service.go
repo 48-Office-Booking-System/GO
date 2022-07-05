@@ -13,3 +13,7 @@ type BookingServiceController struct {
 type OfficeServiceController struct {
 	OfficeServ domain.OfficeServiceAdapter
 }
+
+type ReviewServiceController struct {
+	ReviewServ domain.ReviewServiceAdapter
+}

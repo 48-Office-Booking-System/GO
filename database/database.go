@@ -35,7 +35,7 @@ func InitDB(conf config.Config) *gorm.DB {
 		&model.Type{},
 		&model.Status{},
 		&model.PhotoUrl{},
-		&model.CreatedBy{},
+		&model.Review{},
 	)
 	if err != nil {
 		fmt.Print("error migrating table : ", err)

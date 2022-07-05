@@ -18,6 +18,7 @@ func main() {
 	route.RegisterUserGroupAPI(e, conf)
 	route.RegisterOfficeGroupAPI(e, conf)
 	route.RegisterBookingGroupAPI(e, conf)
+	route.RegisterReviewGroupAPI(e, conf)
 
 	e.Logger.Fatal(e.Start(config.InitConfiguration().SERVER_ADDRESS))
 }

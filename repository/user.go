@@ -12,7 +12,7 @@ import (
 func (r *repoUser) CreateUser(user model.User) (id int, err error) {
 	res := r.DB.Debug().Omit(clause.Associations).Create(&user)
 	if res.RowsAffected < 1 {
-		return 0, fmt.Errorf("error creating user")
+		return 0, res.Error
 	}
 
 	return user.ID, nil
@@ -47,7 +47,7 @@ func (r *repoUser) GetUserByID(id int) (user model.User, err error) {
 func (r *repoUser) UpdateUser(user model.User, id int) error {
 	res := r.DB.Debug().Where("id = ?", id).Omit(clause.Associations).UpdateColumns(&user)
 	if res.RowsAffected < 1 {
-		return fmt.Errorf("error updating user")
+		return res.Error
 	}
 
 	return nil

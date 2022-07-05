@@ -14,7 +14,7 @@ func (r *repoOffice) CreateOffice(office model.Office) (id int, err error) {
 	office.ViewCount = 0
 	res := r.DB.Debug().Create(&office)
 	if res.RowsAffected < 1 {
-		return 0, fmt.Errorf("error creating office")
+		return 0, res.Error
 	}
 
 	return office.ID, nil
@@ -52,7 +52,7 @@ func (r *repoOffice) GetOffice(id int) (office model.Office, err error) {
 func (r *repoOffice) UpdateOffice(office model.Office, id int) error {
 	res := r.DB.Debug().Where("id = ?", id).Omit(clause.Associations, "ViewCount").UpdateColumns(&office)
 	if res.RowsAffected < 1 {
-		return fmt.Errorf("error updating office")
+		return res.Error
 	}
 
 	return nil

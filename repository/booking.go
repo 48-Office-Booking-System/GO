@@ -13,7 +13,7 @@ import (
 func (r *repoBooking) CreateBooking(booking model.Booking) (id int, err error) {
 	res := r.DB.Debug().Omit("User", "Office").Create(&booking)
 	if res.RowsAffected < 1 {
-		return 0, fmt.Errorf("error creating booking")
+		return 0, res.Error
 	}
 
 	return booking.ID, nil
@@ -53,7 +53,7 @@ func (r *repoBooking) UpdateBooking(booking model.Booking, id int) error {
 
 	res := r.DB.Debug().Where("id = ?", id).Omit(clause.Associations).UpdateColumns(&booking)
 	if res.RowsAffected < 1 {
-		return fmt.Errorf("error updating booking")
+		return res.Error
 	}
 
 	return nil
@@ -67,7 +67,7 @@ func (r *repoBooking) DeleteBooking(id int) error {
 	res := r.DB.Find(&booking)
 
 	if res.RowsAffected < 1 {
-		return fmt.Errorf("booking not found")
+		return fmt.Errorf("Booking not found")
 	}
 
 	err := r.DB.Debug().Omit(clause.Associations).Unscoped().Delete(&booking).Error
