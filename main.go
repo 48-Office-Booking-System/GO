@@ -18,4 +18,3 @@ func main() {
 
 	e.Logger.Fatal(e.Start(config.InitConfiguration().SERVER_ADDRESS))
 }
-
