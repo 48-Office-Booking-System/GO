@@ -72,6 +72,37 @@ func (r *repoUser) DeleteUser(id int) error {
 	return nil
 }
 
+func (r *repoUser) GetRoles() (roles []model.Role, err error) {
+	if err = r.DB.Debug().
+		Find(&roles).
+		Error; err != nil {
+
+		return []model.Role{}, err
+
+	}
+
+	return roles, nil
+}
+
+func (r *repoUser) DeleteRole(id int) error {
+	role := model.Role{}
+	role.ID = id
+
+	res := r.DB.Find(&role)
+
+	if res.RowsAffected < 1 {
+		return fmt.Errorf("role not found")
+	}
+
+	err := r.DB.Debug().Unscoped().Delete(&role).Error
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func NewUser(db *gorm.DB) domain.UserRepoAdapter {
 	return &repoUser{
 		DB: db,

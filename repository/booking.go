@@ -67,10 +67,41 @@ func (r *repoBooking) DeleteBooking(id int) error {
 	res := r.DB.Find(&booking)
 
 	if res.RowsAffected < 1 {
-		return fmt.Errorf("Booking not found")
+		return fmt.Errorf("booking not found")
 	}
 
 	err := r.DB.Debug().Omit(clause.Associations).Unscoped().Delete(&booking).Error
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (r *repoBooking) GetStatuses() (statuses []model.Status, err error) {
+	if err = r.DB.Debug().
+		Find(&statuses).
+		Error; err != nil {
+
+		return []model.Status{}, err
+
+	}
+
+	return statuses, nil
+}
+
+func (r *repoBooking) DeleteStatus(id int) error {
+	status := model.Status{}
+	status.ID = id
+
+	res := r.DB.Find(&status)
+
+	if res.RowsAffected < 1 {
+		return fmt.Errorf("status not found")
+	}
+
+	err := r.DB.Debug().Unscoped().Delete(&status).Error
 
 	if err != nil {
 		return err

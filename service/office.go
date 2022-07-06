@@ -31,6 +31,30 @@ func (rs *officeService) DeleteOfficeService(id int) error {
 	return rs.repo.DeleteOffice(id)
 }
 
+func (rs *officeService) GetTypesService() (types []model.Type, err error) {
+	return rs.repo.GetTypes()
+}
+
+func (rs *officeService) DeleteTypeService(id int) error {
+	return rs.repo.DeleteType(id)
+}
+
+func (rs *officeService) GetFacilitationsService() (facilitations []model.Facilitation, err error) {
+	return rs.repo.GetFacilitations()
+}
+
+func (rs *officeService) DeleteFacilitationService(id int) error {
+	return rs.repo.DeleteFacilitation(id)
+}
+
+func (rs *officeService) GetTagsService() (tags []model.Tag, err error) {
+	return rs.repo.GetTags()
+}
+
+func (rs *officeService) DeleteTagService(id int) error {
+	return rs.repo.DeleteTag(id)
+}
+
 func NewOfficeService(repo domain.OfficeRepoAdapter, conf config.Config) domain.OfficeServiceAdapter {
 	return &officeService{
 		repo: repo,

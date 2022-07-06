@@ -13,11 +13,22 @@ func (sc *OfficeServiceController) CreateOfficeController(c echo.Context) error 
 	office := model.Office{}
 	c.Bind(&office)
 
-	_, err := sc.OfficeServ.CreateOfficeService(office)
+	id, err := sc.OfficeServ.CreateOfficeService(office)
 	if err != nil {
 		return c.JSONPretty(http.StatusInternalServerError, model.Response{
 			Code:    http.StatusInternalServerError,
 			Message: err.Error(),
+			Data:    nil,
+		}, "\t")
+	}
+
+	office = model.Office{}
+	office, err = sc.OfficeServ.GetOfficeService(id)
+
+	if err != nil {
+		return c.JSONPretty(http.StatusInternalServerError, model.Response{
+			Code:    http.StatusInternalServerError,
+			Message: "success creating office but office not found" + err.Error(),
 			Data:    nil,
 		}, "\t")
 	}
@@ -86,6 +97,17 @@ func (sc *OfficeServiceController) UpdateOfficeController(c echo.Context) error 
 		}, "\t")
 	}
 
+	office = model.Office{}
+	office, err = sc.OfficeServ.GetOfficeService(int(intID))
+
+	if err != nil {
+		return c.JSONPretty(http.StatusInternalServerError, model.Response{
+			Code:    http.StatusInternalServerError,
+			Message: "success updating office but office not found" + err.Error(),
+			Data:    nil,
+		}, "\t")
+	}
+
 	return c.JSONPretty(http.StatusOK, model.Response{
 		Code:    http.StatusOK,
 		Message: "success updating office",
@@ -110,6 +132,120 @@ func (sc *OfficeServiceController) DeleteOfficeController(c echo.Context) error 
 	return c.JSONPretty(http.StatusOK, model.Response{
 		Code:    http.StatusOK,
 		Message: "success deleting office",
+		Data:    nil,
+	}, "\t")
+}
+
+func (sc *OfficeServiceController) GetTypesController(c echo.Context) error {
+	types, err := sc.OfficeServ.GetTypesService()
+
+	if err != nil {
+		return c.JSONPretty(http.StatusInternalServerError, model.Response{
+			Code:    http.StatusInternalServerError,
+			Message: err.Error(),
+			Data:    nil,
+		}, "\t")
+	}
+
+	return c.JSONPretty(http.StatusOK, model.Response{
+		Code:    http.StatusOK,
+		Message: "success getting types",
+		Data:    types,
+	}, "\t")
+}
+
+func (sc *OfficeServiceController) DeleteTypeController(c echo.Context) error {
+	id := c.Param("id")
+	intID, _ := strconv.ParseInt(id, 10, 64)
+
+	err := sc.OfficeServ.DeleteTypeService(int(intID))
+	if err != nil {
+		return c.JSONPretty(http.StatusInternalServerError, model.Response{
+			Code:    http.StatusInternalServerError,
+			Message: err.Error(),
+			Data:    nil,
+		}, "\t")
+	}
+
+	return c.JSONPretty(http.StatusOK, model.Response{
+		Code:    http.StatusOK,
+		Message: "success deleting type",
+		Data:    nil,
+	}, "\t")
+}
+
+func (sc *OfficeServiceController) GetFacilitationsController(c echo.Context) error {
+	facilitations, err := sc.OfficeServ.GetFacilitationsService()
+
+	if err != nil {
+		return c.JSONPretty(http.StatusInternalServerError, model.Response{
+			Code:    http.StatusInternalServerError,
+			Message: err.Error(),
+			Data:    nil,
+		}, "\t")
+	}
+
+	return c.JSONPretty(http.StatusOK, model.Response{
+		Code:    http.StatusOK,
+		Message: "success getting facilitations",
+		Data:    facilitations,
+	}, "\t")
+}
+
+func (sc *OfficeServiceController) DeleteFacilitationController(c echo.Context) error {
+	id := c.Param("id")
+	intID, _ := strconv.ParseInt(id, 10, 64)
+
+	err := sc.OfficeServ.DeleteFacilitationService(int(intID))
+	if err != nil {
+		return c.JSONPretty(http.StatusInternalServerError, model.Response{
+			Code:    http.StatusInternalServerError,
+			Message: err.Error(),
+			Data:    nil,
+		}, "\t")
+	}
+
+	return c.JSONPretty(http.StatusOK, model.Response{
+		Code:    http.StatusOK,
+		Message: "success deleting facilitation",
+		Data:    nil,
+	}, "\t")
+}
+
+func (sc *OfficeServiceController) GetTagsController(c echo.Context) error {
+	tags, err := sc.OfficeServ.GetTagsService()
+
+	if err != nil {
+		return c.JSONPretty(http.StatusInternalServerError, model.Response{
+			Code:    http.StatusInternalServerError,
+			Message: err.Error(),
+			Data:    nil,
+		}, "\t")
+	}
+
+	return c.JSONPretty(http.StatusOK, model.Response{
+		Code:    http.StatusOK,
+		Message: "success getting roles",
+		Data:    tags,
+	}, "\t")
+}
+
+func (sc *OfficeServiceController) DeleteTagController(c echo.Context) error {
+	id := c.Param("id")
+	intID, _ := strconv.ParseInt(id, 10, 64)
+
+	err := sc.OfficeServ.DeleteTagService(int(intID))
+	if err != nil {
+		return c.JSONPretty(http.StatusInternalServerError, model.Response{
+			Code:    http.StatusInternalServerError,
+			Message: err.Error(),
+			Data:    nil,
+		}, "\t")
+	}
+
+	return c.JSONPretty(http.StatusOK, model.Response{
+		Code:    http.StatusOK,
+		Message: "success deleting role",
 		Data:    nil,
 	}, "\t")
 }

@@ -13,11 +13,22 @@ func (sc *BookingServiceController) CreateBookingController(c echo.Context) erro
 	booking := model.Booking{}
 	c.Bind(&booking)
 
-	_, err := sc.BookingServ.CreateBookingService(booking)
+	id, err := sc.BookingServ.CreateBookingService(booking)
 	if err != nil {
 		return c.JSONPretty(http.StatusInternalServerError, model.Response{
 			Code:    http.StatusInternalServerError,
 			Message: err.Error(),
+			Data:    nil,
+		}, "\t")
+	}
+
+	booking = model.Booking{}
+	booking, err = sc.BookingServ.GetBookingByIDService(id)
+
+	if err != nil {
+		return c.JSONPretty(http.StatusInternalServerError, model.Response{
+			Code:    http.StatusInternalServerError,
+			Message: "success creating booking but booking not found" + err.Error(),
 			Data:    nil,
 		}, "\t")
 	}
@@ -86,6 +97,17 @@ func (sc *BookingServiceController) UpdateBookingController(c echo.Context) erro
 		}, "\t")
 	}
 
+	booking = model.Booking{}
+	booking, err = sc.BookingServ.GetBookingByIDService(int(intID))
+
+	if err != nil {
+		return c.JSONPretty(http.StatusInternalServerError, model.Response{
+			Code:    http.StatusInternalServerError,
+			Message: "success updating booking but booking not found" + err.Error(),
+			Data:    nil,
+		}, "\t")
+	}
+
 	return c.JSONPretty(http.StatusOK, model.Response{
 		Code:    http.StatusOK,
 		Message: "success updating booking",
@@ -110,6 +132,44 @@ func (sc *BookingServiceController) DeleteBookingController(c echo.Context) erro
 	return c.JSONPretty(http.StatusOK, model.Response{
 		Code:    http.StatusOK,
 		Message: "success deleting booking",
+		Data:    nil,
+	}, "\t")
+}
+
+func (sc *BookingServiceController) GetStatusesController(c echo.Context) error {
+	statuses, err := sc.BookingServ.GetStatusesService()
+
+	if err != nil {
+		return c.JSONPretty(http.StatusInternalServerError, model.Response{
+			Code:    http.StatusInternalServerError,
+			Message: err.Error(),
+			Data:    nil,
+		}, "\t")
+	}
+
+	return c.JSONPretty(http.StatusOK, model.Response{
+		Code:    http.StatusOK,
+		Message: "success getting statuses",
+		Data:    statuses,
+	}, "\t")
+}
+
+func (sc *BookingServiceController) DeleteStatusController(c echo.Context) error {
+	id := c.Param("id")
+	intID, _ := strconv.ParseInt(id, 10, 64)
+
+	err := sc.BookingServ.DeleteStatusService(int(intID))
+	if err != nil {
+		return c.JSONPretty(http.StatusInternalServerError, model.Response{
+			Code:    http.StatusInternalServerError,
+			Message: err.Error(),
+			Data:    nil,
+		}, "\t")
+	}
+
+	return c.JSONPretty(http.StatusOK, model.Response{
+		Code:    http.StatusOK,
+		Message: "success deleting status",
 		Data:    nil,
 	}, "\t")
 }

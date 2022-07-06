@@ -12,11 +12,22 @@ func (sc *UserServiceController) CreateUserController(c echo.Context) error {
 	user := model.User{}
 	c.Bind(&user)
 
-	_, err := sc.UserServ.CreateUserService(user)
+	id, err := sc.UserServ.CreateUserService(user)
 	if err != nil {
 		return c.JSONPretty(http.StatusInternalServerError, model.Response{
 			Code:    http.StatusInternalServerError,
 			Message: err.Error(),
+			Data:    nil,
+		}, "\t")
+	}
+
+	user = model.User{}
+	user, err = sc.UserServ.GetUserByIDService(id)
+
+	if err != nil {
+		return c.JSONPretty(http.StatusInternalServerError, model.Response{
+			Code:    http.StatusInternalServerError,
+			Message: "success creating user but user not found" + err.Error(),
 			Data:    nil,
 		}, "\t")
 	}
@@ -82,6 +93,17 @@ func (sc *UserServiceController) UpdateUserController(c echo.Context) error {
 		}, "\t")
 	}
 
+	user = model.User{}
+	user, err = sc.UserServ.GetUserByIDService(int(intID))
+
+	if err != nil {
+		return c.JSONPretty(http.StatusInternalServerError, model.Response{
+			Code:    http.StatusInternalServerError,
+			Message: "success updating user but user not found" + err.Error(),
+			Data:    nil,
+		}, "\t")
+	}
+
 	return c.JSONPretty(http.StatusOK, model.Response{
 		Code:    http.StatusOK,
 		Message: "success updating user",
@@ -105,6 +127,44 @@ func (sc *UserServiceController) DeleteUserController(c echo.Context) error {
 	return c.JSONPretty(http.StatusOK, model.Response{
 		Code:    http.StatusOK,
 		Message: "success deleting user",
+		Data:    nil,
+	}, "\t")
+}
+
+func (sc *UserServiceController) GetRolesController(c echo.Context) error {
+	roles, err := sc.UserServ.GetRolesService()
+
+	if err != nil {
+		return c.JSONPretty(http.StatusInternalServerError, model.Response{
+			Code:    http.StatusInternalServerError,
+			Message: err.Error(),
+			Data:    nil,
+		}, "\t")
+	}
+
+	return c.JSONPretty(http.StatusOK, model.Response{
+		Code:    http.StatusOK,
+		Message: "success getting roles",
+		Data:    roles,
+	}, "\t")
+}
+
+func (sc *UserServiceController) DeleteRoleController(c echo.Context) error {
+	id := c.Param("id")
+	intID, _ := strconv.ParseInt(id, 10, 64)
+
+	err := sc.UserServ.DeleteRoleService(int(intID))
+	if err != nil {
+		return c.JSONPretty(http.StatusInternalServerError, model.Response{
+			Code:    http.StatusInternalServerError,
+			Message: err.Error(),
+			Data:    nil,
+		}, "\t")
+	}
+
+	return c.JSONPretty(http.StatusOK, model.Response{
+		Code:    http.StatusOK,
+		Message: "success deleting role",
 		Data:    nil,
 	}, "\t")
 }

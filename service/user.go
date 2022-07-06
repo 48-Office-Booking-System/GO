@@ -31,6 +31,14 @@ func (rs *userService) DeleteUserService(id int) error {
 	return rs.repo.DeleteUser(id)
 }
 
+func (rs *userService) GetRolesService() (roles []model.Role, err error) {
+	return rs.repo.GetRoles()
+}
+
+func (rs *userService) DeleteRoleService(id int) error {
+	return rs.repo.DeleteRole(id)
+}
+
 func NewUserService(repo domain.UserRepoAdapter, conf config.Config) domain.UserServiceAdapter {
 	return &userService{
 		repo: repo,

@@ -31,6 +31,14 @@ func (rs *bookingService) DeleteBookingService(id int) error {
 	return rs.repo.DeleteBooking(id)
 }
 
+func (rs *bookingService) GetStatusesService() (statuses []model.Status, err error) {
+	return rs.repo.GetStatuses()
+}
+
+func (rs *bookingService) DeleteStatusService(id int) error {
+	return rs.repo.DeleteStatus(id)
+}
+
 func NewBookingService(repo domain.BookingRepoAdapter, conf config.Config) domain.BookingServiceAdapter {
 	return &bookingService{
 		repo: repo,

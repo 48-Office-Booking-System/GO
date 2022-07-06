@@ -28,4 +28,13 @@ func RegisterOfficeGroupAPI(e *echo.Echo, conf config.Config) {
 	apiOffice.GET("/:id", cont.GetOfficeController)
 	apiOffice.PUT("/:id", cont.UpdateOfficeController)
 	apiOffice.DELETE("/:id", cont.DeleteOfficeController)
+
+	e.GET("/type/all", cont.GetTypesController)
+	e.DELETE("/type/:id", cont.DeleteTypeController)
+
+	e.GET("/facilitation/all", cont.GetFacilitationsController)
+	e.DELETE("/facilitation/:id", cont.DeleteFacilitationController)
+
+	e.GET("/tag/all", cont.GetTagsController)
+	e.DELETE("/tag/:id", cont.DeleteTagController)
 }

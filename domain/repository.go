@@ -10,6 +10,9 @@ type UserRepoAdapter interface {
 	GetUserByID(id int) (user model.User, err error)
 	UpdateUser(user model.User, id int) error
 	DeleteUser(id int) error
+
+	GetRoles() (roles []model.Role, err error)
+	DeleteRole(id int) error
 }
 
 type BookingRepoAdapter interface {
@@ -18,6 +21,9 @@ type BookingRepoAdapter interface {
 	GetBookingByID(id int) (booking model.Booking, err error)
 	UpdateBooking(booking model.Booking, id int) error
 	DeleteBooking(id int) error
+
+	GetStatuses() (statuses []model.Status, err error)
+	DeleteStatus(id int) error
 }
 
 type OfficeRepoAdapter interface {
@@ -26,6 +32,15 @@ type OfficeRepoAdapter interface {
 	GetOffice(id int) (office model.Office, err error)
 	UpdateOffice(office model.Office, id int) error
 	DeleteOffice(id int) error
+
+	GetTypes() (types []model.Type, err error)
+	DeleteType(id int) error
+
+	GetFacilitations() (facilitations []model.Facilitation, err error)
+	DeleteFacilitation(id int) error
+
+	GetTags() (tags []model.Tag, err error)
+	DeleteTag(id int) error
 }
 
 type ReviewRepoAdapter interface {

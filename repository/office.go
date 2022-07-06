@@ -84,6 +84,99 @@ func (r *repoOffice) DeleteOffice(id int) error {
 	return nil
 }
 
+func (r *repoOffice) GetTypes() (types []model.Type, err error) {
+	if err = r.DB.Debug().
+		Find(&types).
+		Error; err != nil {
+
+		return []model.Type{}, err
+
+	}
+
+	return types, nil
+}
+
+func (r *repoOffice) DeleteType(id int) error {
+	tipe := model.Type{}
+	tipe.ID = id
+
+	res := r.DB.Find(&tipe)
+
+	if res.RowsAffected < 1 {
+		return fmt.Errorf("type not found")
+	}
+
+	err := r.DB.Debug().Unscoped().Delete(&tipe).Error
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (r *repoOffice) GetFacilitations() (facilitations []model.Facilitation, err error) {
+	if err = r.DB.Debug().
+		Find(&facilitations).
+		Error; err != nil {
+
+		return []model.Facilitation{}, err
+
+	}
+
+	return facilitations, nil
+}
+
+func (r *repoOffice) DeleteFacilitation(id int) error {
+	facilitation := model.Facilitation{}
+	facilitation.ID = id
+
+	res := r.DB.Find(&facilitation)
+
+	if res.RowsAffected < 1 {
+		return fmt.Errorf("facilitation not found")
+	}
+
+	err := r.DB.Debug().Unscoped().Delete(&facilitation).Error
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (r *repoOffice) GetTags() (tags []model.Tag, err error) {
+	if err = r.DB.Debug().
+		Find(&tags).
+		Error; err != nil {
+
+		return []model.Tag{}, err
+
+	}
+
+	return tags, nil
+}
+
+func (r *repoOffice) DeleteTag(id int) error {
+	tag := model.Tag{}
+	tag.ID = id
+
+	res := r.DB.Find(&tag)
+
+	if res.RowsAffected < 1 {
+		return fmt.Errorf("tag not found")
+	}
+
+	err := r.DB.Debug().Unscoped().Delete(&tag).Error
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func NewOffice(db *gorm.DB) domain.OfficeRepoAdapter {
 	return &repoOffice{
 		DB: db,
