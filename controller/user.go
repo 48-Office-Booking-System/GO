@@ -40,6 +40,7 @@ func (sc *UserServiceController) CreateUserController(c echo.Context) error {
 }
 
 func (sc *UserServiceController) GetUsersController(c echo.Context) error {
+	c.QueryParam("user_id")
 	users, err := sc.UserServ.GetUsersService()
 
 	if err != nil {
