@@ -58,7 +58,7 @@ func (sc *UserServiceController) GetUsersController(c echo.Context) error {
 
 	return c.JSONPretty(http.StatusOK, model.Response{
 		Code:    http.StatusOK,
-		Message: "success getting users " + role,
+		Message: "success getting users",
 		Data:    users,
 	}, "\t")
 }
