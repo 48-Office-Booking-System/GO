@@ -50,7 +50,8 @@ func (sc *UserServiceController) GetUsersController(c echo.Context) error {
 		}, "\t")
 	}
 
-	role_id, err := strconv.Atoi(c.QueryParam("role_id"))
+	role := c.QueryParam("role_id")
+	role_id, err := strconv.Atoi(role)
 	if err == nil {
 		for i := range users {
 			if users[i].RoleID != role_id {
@@ -61,7 +62,7 @@ func (sc *UserServiceController) GetUsersController(c echo.Context) error {
 
 	return c.JSONPretty(http.StatusOK, model.Response{
 		Code:    http.StatusOK,
-		Message: "success getting users",
+		Message: "success getting users " + role,
 		Data:    users,
 	}, "\t")
 }
