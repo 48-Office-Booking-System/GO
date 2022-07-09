@@ -40,8 +40,16 @@ func (sc *UserServiceController) CreateUserController(c echo.Context) error {
 }
 
 func (sc *UserServiceController) GetUsersController(c echo.Context) error {
-	c.QueryParam("user_id")
+	role_id := c.QueryParam("role_id")
 	users, err := sc.UserServ.GetUsersService()
+	if role_id != "" {
+		role, _ := strconv.Atoi(role_id)
+		for i := range users {
+			if users[i].RoleID != role {
+				users[i] = model.User{}
+			}
+		}
+	}
 
 	if err != nil {
 		return c.JSONPretty(http.StatusInternalServerError, model.Response{
