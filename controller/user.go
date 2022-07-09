@@ -54,7 +54,7 @@ func (sc *UserServiceController) GetUsersController(c echo.Context) error {
 	if err == nil {
 		for i := range users {
 			if users[i].RoleID != role_id {
-				users[i] = model.User{}
+				users = append(users[:i], users[i+1:]...)
 			}
 		}
 	}
