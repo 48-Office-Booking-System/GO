@@ -15,8 +15,8 @@ func (rs *userService) CreateUserService(user model.User) (id int, err error) {
 	return rs.repo.CreateUser(user)
 }
 
-func (rs *userService) GetUsersService() (users []model.User, err error) {
-	return rs.repo.GetUsers()
+func (rs *userService) GetUsersService(user model.User) (users []model.User, err error) {
+	return rs.repo.GetUsers(user)
 }
 
 func (rs *userService) GetUserByIDService(id int) (user model.User, err error) {

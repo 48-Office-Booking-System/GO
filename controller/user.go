@@ -40,7 +40,13 @@ func (sc *UserServiceController) CreateUserController(c echo.Context) error {
 }
 
 func (sc *UserServiceController) GetUsersController(c echo.Context) error {
-	users, err := sc.UserServ.GetUsersService()
+	user := model.User{}
+	role := c.QueryParam("role_id")
+	role_id, err := strconv.Atoi(role)
+	if err == nil {
+		user.RoleID = role_id
+	}
+	users, err := sc.UserServ.GetUsersService(user)
 
 	if err != nil {
 		return c.JSONPretty(http.StatusInternalServerError, model.Response{
@@ -48,16 +54,6 @@ func (sc *UserServiceController) GetUsersController(c echo.Context) error {
 			Message: err.Error(),
 			Data:    nil,
 		}, "\t")
-	}
-
-	role := c.QueryParam("role_id")
-	role_id, err := strconv.Atoi(role)
-	if err == nil {
-		for i := range users {
-			if users[i].RoleID != role_id {
-				users = append(users[:i], users[i+1:]...)
-			}
-		}
 	}
 
 	return c.JSONPretty(http.StatusOK, model.Response{

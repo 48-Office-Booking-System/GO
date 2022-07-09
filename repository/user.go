@@ -18,14 +18,22 @@ func (r *repoUser) CreateUser(user model.User) (id int, err error) {
 	return user.ID, nil
 }
 
-func (r *repoUser) GetUsers() (users []model.User, err error) {
-	if err = r.DB.Debug().
-		Preload(clause.Associations).
-		Find(&users).
-		Error; err != nil {
+func (r *repoUser) GetUsers(user model.User) (users []model.User, err error) {
+	if user.RoleID == 0 {
+		err = r.DB.Debug().
+			Preload(clause.Associations).
+			Find(&users).
+			Error
+	} else {
+		err = r.DB.Debug().
+			Where("role_id = ?", user.RoleID).
+			Preload(clause.Associations).
+			Find(&users).
+			Error
+	}
 
+	if err != nil {
 		return []model.User{}, err
-
 	}
 
 	return users, nil
