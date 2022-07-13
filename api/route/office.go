@@ -26,4 +26,6 @@ func RegisterOfficeGroupAPI(e *echo.Echo, conf config.Config) {
 	apiOffice.POST("", cont.CreateOfficeController)
 	apiOffice.GET("/all", cont.GetAllOfficeController)
 	apiOffice.GET("/:id", cont.GetOfficeController)
+	apiOffice.PUT("/:id", cont.UpdateOfficeController)
+	apiOffice.DELETE("/:id", cont.DeleteOfficeController)
 }

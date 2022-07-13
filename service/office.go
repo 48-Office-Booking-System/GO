@@ -15,7 +15,7 @@ func (rs *officeService) CreateOfficeService(office model.Office) (id int, err e
 	return rs.repo.CreateOffice(office)
 }
 
-func (rs *officeService) GetAllOfficeService(id int) (allOffice []model.Office, err error) {
+func (rs *officeService) GetAllOfficeService() (office []model.Office, err error) {
 	return rs.repo.GetAllOffice()
 }
 
