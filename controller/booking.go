@@ -113,3 +113,23 @@ func (sc *BookingServiceController) DeleteBookingController(c echo.Context) erro
 		Data:    nil,
 	}, "\t")
 }
+
+func LoginBookingController(c echo.Context) error {
+	booking := model.Booking{}
+	c.Bind(&booking)
+
+	_, err := sc.BookingServ.Where("email = ? & password = ?").Error
+	if err != nil {
+		return c.JSONPretty(http.StatusInternalServerError, model.Response{
+			Code:    http.StatusInternalServerError,
+			Message: err.Error(),
+			Data:    nil,
+		}, "\t")
+	}
+
+	return c.JSONPretty(http.StatusOK, model.Response{
+		Code:    http.StatusOK,
+		Message: "success creating booking",
+		Data:    booking,
+	}, "\t")
+}

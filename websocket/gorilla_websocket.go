@@ -62,8 +62,8 @@ func main() {
 	fmt.Println("Server starting at :8080")
 	http.ListenAndServe(":8080", nil)
 }
-
-func handleIO(currentConn *WebSocketConnection, connections []*WebSocketConnection) {
+           
+func handleI     O(currentConn *WebSocketConnection, connections []*WebSocketConnection) {
 	defer func() {
 		if r := recover(); r != nil {
 			log.Println("ERROR", fmt.Sprintf("%v", r))

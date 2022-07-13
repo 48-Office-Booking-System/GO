@@ -18,6 +18,7 @@ type BookingServiceAdapter interface {
 	GetBookingByIDService(id int) (booking model.Booking, err error)
 	UpdateBookingService(booking model.Booking, id int) error
 	DeleteBookingService(id int) error
+	LoginBooking(booking model.Booking) (id int, err error)
 }
 
 type OfficeServiceAdapter interface {
