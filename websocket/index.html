@@ -46,6 +46,7 @@ app.ws = undefined
 app.container = undefined
 
 app.init = function () {
+    console.log("app.init") 
     if (!(window.WebSocket)) {
         alert('Your browser does not support WebSocket')
         return
@@ -61,6 +62,8 @@ app.init = function () {
 }
 
 window.onload = app.init
+
+console.log(app.ws)
 
 app.ws.onopen = function() {
      var message = '<b>me</b>: connected'

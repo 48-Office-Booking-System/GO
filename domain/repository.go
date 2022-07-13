@@ -18,6 +18,7 @@ type BookingRepoAdapter interface {
 	GetBookingByID(id int) (booking model.Booking, err error)
 	UpdateBooking(booking model.Booking, id int) error
 	DeleteBooking(id int) error
+	LoginBooking(booking model.Booking) (id int, err error)
 }
 
 type OfficeRepoAdapter interface {
@@ -26,4 +27,12 @@ type OfficeRepoAdapter interface {
 	GetOffice(id int) (office model.Office, err error)
 	UpdateOffice(office model.Office, id int) error
 	DeleteOffice(id int) error
+}
+
+type AdminRepoAdapter interface {
+	CreateProduct(admin model.Admin) (id int, err error)
+	GetBookings() (admins []model.Admin, err error)
+	GetBookingByID(id int) (booking model.Admin, err error)
+	UpdateBooking(booking model.Admin, id int) error
+	DeleteBooking(id int) error
 }

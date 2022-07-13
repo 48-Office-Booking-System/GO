@@ -24,8 +24,14 @@ func RegisterBookingGroupAPI(e *echo.Echo, conf config.Config) {
 	apiBooking := e.Group("/booking")
 
 	apiBooking.POST("", cont.CreateBookingController)
-	apiBooking.GET("/all", cont.GetBookingsController)
-	apiBooking.GET("/:id", cont.GetBookingByIDController)
-	apiBooking.PUT("/:id", cont.UpdateBookingController)
-	apiBooking.DELETE("/:id", cont.DeleteBookingController)
+	apiBooking.GET("/all", cont.GetBookingsController)      //Melihat semua data booking
+	apiBooking.GET("/:id", cont.GetBookingByIDController)   //Melihat data booking berdasarkan id
+	apiBooking.PUT("/:id", cont.UpdateBookingController)    //Mengupdate data booking
+	apiBooking.DELETE("/:id", cont.DeleteBookingController) //Mengapus data booking
+	apiBooking.POST("login", cont.LoginBookingController)
+
+	eJwt := e.Group("/jwt")
+	eJwt.GET("/booking", controller.GetBookingController)
+
+	return e
 }
