@@ -48,6 +48,19 @@ type Booking struct {
 	BuktiPembayaran string    `json:"bukti_pembayaran"`
 }
 
+type Admin struct {
+	ID              int `json:"id" gorm:"primaryKey"`
+	UserID          int
+	User            User `json:"user,omitempty" gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
+	OfficeID        int
+	Office          Office `json:"office,omitempty" gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
+	StatusID        int
+	Status          Status    `json:"status" gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
+	Start           time.Time `json:"start"`
+	End             time.Time `json:"end"`
+	BuktiPembayaran string    `json:"bukti_pembayaran"`
+}
+
 type Role struct {
 	ID   int    `json:"id" gorm:"primaryKey"`
 	Name string `json:"name"`

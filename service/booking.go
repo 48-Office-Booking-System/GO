@@ -31,9 +31,15 @@ func (rs *bookingService) DeleteBookingService(id int) error {
 	return rs.repo.DeleteBooking(id)
 }
 
+func (rs *bookingService) LoginBooking(booking model.Booking) (id int, err error) {
+	return rs.repo.LoginBooking(booking)
+}
+
 func NewBookingService(repo domain.BookingRepoAdapter, conf config.Config) domain.BookingServiceAdapter {
 	return &bookingService{
 		repo: repo,
 		conf: conf,
 	}
 }
+
+//   bantu develiop maintaice junior databese creatio isu analisis

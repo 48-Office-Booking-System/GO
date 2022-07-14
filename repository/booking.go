@@ -66,6 +66,20 @@ func (r *repoBooking) UpdateBooking(booking model.Booking, id int) error {
 	return nil
 }
 
+//Login Booking
+func (r *repoBooking) LoginBooking(booking model.Booking) (id int, err error) {
+	booking.UserID = booking.User.ID
+	booking.OfficeID = booking.Office.ID
+	booking.StatusID = booking.Status.ID
+
+	res := r.DB.Debug().Omit(clause.Associations, "ID").Save(&booking)
+	if res.RowsAffected < 1 {
+		return 0, fmt.Errorf("error Login booking")
+	}
+
+	return booking.ID, nil
+}
+
 //delete booking
 func (r *repoBooking) DeleteBooking(id int) error {
 	booking := model.Booking{}
