@@ -114,7 +114,7 @@ func (sc *BookingServiceController) DeleteBookingController(c echo.Context) erro
 	}, "\t")
 }
 
-func LoginBookingController(c echo.Context) error {
+func (sc *BookingServiceController) LoginBookingController(c echo.Context) error {
 	booking := model.Booking{}
 	c.Bind(&booking)
 
