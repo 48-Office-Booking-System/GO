@@ -4,6 +4,7 @@ import (
 	"KOBA/domain"
 	"KOBA/model"
 	"fmt"
+	"time"
 
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
@@ -11,6 +12,29 @@ import (
 
 //create booking
 func (r *repoBooking) CreateBooking(booking model.Booking) (id int, err error) {
+	dateFormat := "2006-01-02"
+	hourFormat := "15:04:05 WIB"
+
+	booking.StartDate, err = time.Parse(dateFormat, booking.StartDateString)
+	if err != nil {
+		return 0, err
+	}
+
+	booking.EndDate, err = time.Parse(hourFormat, booking.EndDateString)
+	if err != nil {
+		return 0, err
+	}
+
+	booking.StartHour, err = time.Parse(hourFormat, booking.StartHourString)
+	if err != nil {
+		return 0, err
+	}
+
+	booking.EndHour, err = time.Parse(hourFormat, booking.EndHourString)
+	if err != nil {
+		return 0, err
+	}
+
 	res := r.DB.Debug().Omit("User", "Office").Create(&booking)
 	if res.RowsAffected < 1 {
 		return 0, res.Error

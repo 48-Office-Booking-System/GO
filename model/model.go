@@ -1,5 +1,7 @@
 package model
 
+import "time"
+
 type User struct {
 	ID       int       `json:"id" gorm:"primaryKey"`
 	RoleID   int       `json:"role_id,omitempty"`
@@ -35,15 +37,21 @@ type Office struct {
 }
 
 type Booking struct {
-	ID       int    `json:"id" gorm:"primaryKey"`
-	UserID   int    `json:"user_id,omitempty"`
-	User     User   `json:"user,omitempty" gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
-	OfficeID int    `json:"office_id,omitempty"`
-	Office   Office `json:"office,omitempty" gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
-	StatusID int    `json:"status_id,omitempty"`
-	Status   Status `json:"status" gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
-	/* Start           time.Time `json:"start"`
-	End             time.Time `json:"end"` */
+	ID              int    `json:"id" gorm:"primaryKey"`
+	UserID          int    `json:"user_id,omitempty"`
+	User            User   `json:"user,omitempty" gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
+	OfficeID        int    `json:"office_id,omitempty"`
+	Office          Office `json:"office,omitempty" gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
+	StatusID        int    `json:"status_id,omitempty"`
+	Status          Status `json:"status" gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
+	StartDateString string `json:"start_date" gorm:"-"`
+	EndDateString   string `json:"end_date" gorm:"-"`
+	StartDate       time.Time
+	EndDate         time.Time
+	StartHourString string `json:"start_hour" gorm:"-"`
+	EndHourString   string `json:"end_hour" gorm:"-"`
+	StartHour       time.Time
+	EndHour         time.Time
 	BuktiPembayaran string `json:"bukti_pembayaran"`
 }
 

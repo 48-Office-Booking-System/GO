@@ -11,7 +11,15 @@ import (
 //create booking
 func (sc *BookingServiceController) CreateBookingController(c echo.Context) error {
 	booking := model.Booking{}
-	c.Bind(&booking)
+	err := c.Bind(&booking)
+
+	if err != nil {
+		return c.JSONPretty(http.StatusBadRequest, model.Response{
+			Code:    http.StatusBadRequest,
+			Message: err.Error(),
+			Data:    nil,
+		}, "\t")
+	}
 
 	id, err := sc.BookingServ.CreateBookingService(booking)
 	if err != nil {
@@ -26,9 +34,9 @@ func (sc *BookingServiceController) CreateBookingController(c echo.Context) erro
 	booking, err = sc.BookingServ.GetBookingByIDService(id)
 
 	if err != nil {
-		return c.JSONPretty(http.StatusInternalServerError, model.Response{
-			Code:    http.StatusInternalServerError,
-			Message: "success creating booking but booking not found" + err.Error(),
+		return c.JSONPretty(http.StatusNotFound, model.Response{
+			Code:    http.StatusNotFound,
+			Message: "success creating booking but booking not found : " + err.Error(),
 			Data:    nil,
 		}, "\t")
 	}
