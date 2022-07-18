@@ -2,7 +2,7 @@ name: Continuous Delivery
 
 on:
   push:
-    branches: [ main ]
+    branches: [ ario ]
 
 jobs:
   docker:
