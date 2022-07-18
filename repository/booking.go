@@ -63,6 +63,13 @@ func (r *repoBooking) GetBookings() (bookings []model.Booking, err error) {
 
 	}
 
+	for i := range bookings {
+		bookings[i].StartDateString = bookings[i].StartDate.Format(dateFormat)
+		bookings[i].EndDateString = bookings[i].EndDate.Format(dateFormat)
+		bookings[i].StartHourString = bookings[i].StartHour.Format(hourFormat)
+		bookings[i].EndHourString = bookings[i].EndHour.Format(hourFormat)
+	}
+
 	return bookings, nil
 }
 
@@ -76,6 +83,11 @@ func (r *repoBooking) GetBookingByID(id int) (booking model.Booking, err error) 
 		return model.Booking{}, err
 
 	}
+
+	booking.StartDateString = booking.StartDate.Format(dateFormat)
+	booking.EndDateString = booking.EndDate.Format(dateFormat)
+	booking.StartHourString = booking.StartHour.Format(hourFormat)
+	booking.EndHourString = booking.EndHour.Format(hourFormat)
 
 	return booking, nil
 }
