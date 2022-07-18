@@ -52,6 +52,8 @@ type Booking struct {
 	EndHourString   string `json:"end_hour" gorm:"-"`
 	StartHour       time.Time
 	EndHour         time.Time
+	DurationInHour  int    `json:"duration_in_hour"`
+	TotalPrice      int    `json:"total_price"`
 	BuktiPembayaran string `json:"bukti_pembayaran"`
 }
 

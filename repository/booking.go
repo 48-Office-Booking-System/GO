@@ -4,17 +4,18 @@ import (
 	"KOBA/domain"
 	"KOBA/model"
 	"fmt"
+	"math"
 	"time"
 
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
 )
 
+const dateFormat = "2006-01-02"
+const hourFormat = "15:04:05 WIB"
+
 //create booking
 func (r *repoBooking) CreateBooking(booking model.Booking) (id int, err error) {
-	dateFormat := "2006-01-02"
-	hourFormat := "15:04:05 WIB"
-
 	booking.StartDate, err = time.Parse(dateFormat, booking.StartDateString)
 	if err != nil {
 		return 0, err
@@ -34,6 +35,14 @@ func (r *repoBooking) CreateBooking(booking model.Booking) (id int, err error) {
 	if err != nil {
 		return 0, err
 	}
+
+	office := model.Office{
+		ID: booking.OfficeID,
+	}
+	r.DB.First(&office, booking.OfficeID)
+
+	booking.DurationInHour = int(math.Round(booking.EndHour.Sub(booking.StartHour).Hours()))
+	booking.TotalPrice = office.Price * booking.DurationInHour
 
 	res := r.DB.Debug().Omit("User", "Office").Create(&booking)
 	if res.RowsAffected < 1 {
@@ -74,6 +83,48 @@ func (r *repoBooking) GetBookingByID(id int) (booking model.Booking, err error) 
 //update booking
 func (r *repoBooking) UpdateBooking(booking model.Booking, id int) error {
 	booking.ID = id
+	var err error
+
+	temp := model.Booking{
+		ID: id,
+	}
+
+	r.DB.Preload("Office").First(&temp, booking.ID)
+
+	if booking.StartDateString != "" {
+		booking.StartDate, err = time.Parse(dateFormat, booking.StartDateString)
+		if err != nil {
+			return err
+		}
+		temp.StartDate = booking.StartDate
+	}
+
+	if booking.EndDateString != "" {
+		booking.EndDate, err = time.Parse(hourFormat, booking.EndDateString)
+		if err != nil {
+			return err
+		}
+		temp.EndDate = booking.EndDate
+	}
+
+	if booking.StartHourString != "" {
+		booking.StartHour, err = time.Parse(hourFormat, booking.StartHourString)
+		if err != nil {
+			return err
+		}
+		temp.StartHour = booking.StartHour
+	}
+
+	if booking.EndHourString != "" {
+		booking.EndHour, err = time.Parse(hourFormat, booking.EndHourString)
+		if err != nil {
+			return err
+		}
+		temp.EndHour = booking.EndHour
+	}
+
+	booking.DurationInHour = int(math.Round(booking.EndHour.Sub(booking.StartHour).Hours()))
+	booking.TotalPrice = temp.Office.Price * booking.DurationInHour
 
 	res := r.DB.Debug().Where("id = ?", id).Omit(clause.Associations).UpdateColumns(&booking)
 	if res.RowsAffected < 1 {
