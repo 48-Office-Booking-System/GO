@@ -15,8 +15,8 @@ func (rs *bookingService) CreateBookingService(booking model.Booking) (id int, e
 	return rs.repo.CreateBooking(booking)
 }
 
-func (rs *bookingService) GetBookingsService() (bookings []model.Booking, err error) {
-	return rs.repo.GetBookings()
+func (rs *bookingService) GetBookingsService(booking model.Booking) (bookings []model.Booking, err error) {
+	return rs.repo.GetBookings(booking)
 }
 
 func (rs *bookingService) GetBookingByIDService(id int) (booking model.Booking, err error) {

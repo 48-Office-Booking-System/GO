@@ -41,11 +41,11 @@ func (sc *UserServiceController) CreateUserController(c echo.Context) error {
 
 func (sc *UserServiceController) GetUsersController(c echo.Context) error {
 	user := model.User{}
-	role := c.QueryParam("role_id")
-	role_id, err := strconv.Atoi(role)
+	role_id, err := strconv.Atoi(c.QueryParam("role_id"))
 	if err == nil {
 		user.RoleID = role_id
 	}
+
 	users, err := sc.UserServ.GetUsersService(user)
 
 	if err != nil {

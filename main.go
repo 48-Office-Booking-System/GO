@@ -14,7 +14,7 @@ func main() {
 	e := echo.New()
 	e.Use(middleware.CORS())
 
-	route.HealthAPI(e, conf)
+	route.HealthAPI(e)
 	route.RegisterUserGroupAPI(e, conf)
 	route.RegisterOfficeGroupAPI(e, conf)
 	route.RegisterBookingGroupAPI(e, conf)

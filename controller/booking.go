@@ -50,7 +50,13 @@ func (sc *BookingServiceController) CreateBookingController(c echo.Context) erro
 
 //get all booking
 func (sc *BookingServiceController) GetBookingsController(c echo.Context) error {
-	bookings, err := sc.BookingServ.GetBookingsService()
+	booking := model.Booking{}
+	status_id, err := strconv.Atoi(c.QueryParam("status_id"))
+	if err == nil {
+		booking.StatusID = status_id
+	}
+
+	bookings, err := sc.BookingServ.GetBookingsService(booking)
 
 	if err != nil {
 		return c.JSONPretty(http.StatusInternalServerError, model.Response{

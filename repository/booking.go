@@ -53,8 +53,9 @@ func (r *repoBooking) CreateBooking(booking model.Booking) (id int, err error) {
 }
 
 //Gett all booking
-func (r *repoBooking) GetBookings() (bookings []model.Booking, err error) {
+func (r *repoBooking) GetBookings(booking model.Booking) (bookings []model.Booking, err error) {
 	if err = r.DB.Debug().
+		Where(&booking).
 		Preload(clause.Associations).
 		Find(&bookings).
 		Error; err != nil {
