@@ -43,13 +43,5 @@ func InitDB(conf config.Config) *gorm.DB {
 		fmt.Println("BERHASILLLL")
 	}
 
-	DB.Debug().Exec("DELETE FROM `koba-test`.`statuses` WHERE (`id` = '8');")
-	DB.Debug().Exec("DELETE FROM `koba-test`.`statuses` WHERE (`id` = '9');")
-	DB.Debug().Exec("DELETE FROM `koba-test`.`statuses` WHERE (`id` = '12');")
-
-	DB.Debug().Exec("INSERT INTO `koba-test`.`statuses` (`id`, `name`) VALUES ('1', 'Pending');")
-	DB.Debug().Exec("INSERT INTO `koba-test`.`statuses` (`id`, `name`) VALUES ('2', 'Success');")
-	DB.Debug().Exec("INSERT INTO `koba-test`.`statuses` (`id`, `name`) VALUES ('3', 'Fail');")
-
 	return DB
 }
