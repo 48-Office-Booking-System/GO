@@ -5,22 +5,22 @@ import "time"
 type User struct {
 	ID       int       `json:"id" gorm:"primaryKey"`
 	RoleID   int       `json:"role_id,omitempty"`
-	Role     Role      `json:"role" gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
+	Role     Role      `json:"role" gorm:"constraint:OnUpdate:SET NULL,OnDelete:SET NULL;"`
 	Name     string    `json:"name"`
 	Email    string    `json:"email"`
 	Password string    `json:"password,omitempty"`
 	PhotoUrl string    `json:"photo_url"`
 	Number   string    `json:"number"`
-	Bookings []Booking `json:"bookings" gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
-	Reviews  []Review  `json:"reviews" gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
+	Bookings []Booking `json:"bookings" gorm:"constraint:OnUpdate:SET NULL,OnDelete:SET NULL;"`
+	Reviews  []Review  `json:"reviews" gorm:"constraint:OnUpdate:SET NULL,OnDelete:SET NULL;"`
 }
 
 type Office struct {
 	ID int `json:"id" gorm:"primaryKey"`
 	// CreatedBy     int
-	// User          User `json:"created_by" gorm:"foreignKey:CreatedBy;constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
+	// User          User `json:"created_by" gorm:"foreignKey:CreatedBy;constraint:OnUpdate:SET NULL,OnDelete:SET NULL;"`
 	TypeID        int            `json:"type_id,omitempty"`
-	Type          Type           `json:"type" gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
+	Type          Type           `json:"type" gorm:"constraint:OnUpdate:SET NULL,OnDelete:SET NULL;"`
 	Name          string         `json:"name"`
 	Description   string         `json:"description"`
 	Latitude      string         `json:"latitude"`
@@ -31,19 +31,19 @@ type Office struct {
 	ChairMax      int            `json:"chair_max"`
 	PhotoUrls     []PhotoUrl     `json:"photo_urls"`
 	Number        string         `json:"number"`
-	Facilitations []Facilitation `json:"facilitations" gorm:"many2many:office_facilitations;constraint:OnUpdate:CASCADE,OnDelete:CASCADE"`
-	Tags          []Tag          `json:"tags" gorm:"many2many:office_tags;constraint:OnUpdate:CASCADE,OnDelete:CASCADE"`
-	Reviews       []Review       `json:"reviews" gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
+	Facilitations []Facilitation `json:"facilitations" gorm:"many2many:office_facilitations;constraint:OnUpdate:SET NULL,OnDelete:SET NULL"`
+	Tags          []Tag          `json:"tags" gorm:"many2many:office_tags;constraint:OnUpdate:SET NULL,OnDelete:SET NULL"`
+	Reviews       []Review       `json:"reviews" gorm:"constraint:OnUpdate:SET NULL,OnDelete:SET NULL;"`
 }
 
 type Booking struct {
 	ID              int    `json:"id" gorm:"primaryKey"`
 	UserID          int    `json:"user_id,omitempty"`
-	User            User   `json:"user,omitempty" gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
+	User            User   `json:"user,omitempty" gorm:"constraint:OnUpdate:SET NULL,OnDelete:SET NULL;"`
 	OfficeID        int    `json:"office_id,omitempty"`
-	Office          Office `json:"office,omitempty" gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
+	Office          Office `json:"office,omitempty" gorm:"constraint:OnUpdate:SET NULL,OnDelete:SET NULL;"`
 	StatusID        int    `json:"status_id,omitempty"`
-	Status          Status `json:"status" gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
+	Status          Status `json:"status" gorm:"constraint:OnUpdate:SET NULL,OnDelete:SET NULL;"`
 	StartDateString string `json:"start_date" gorm:"-"`
 	EndDateString   string `json:"end_date" gorm:"-"`
 	StartDate       time.Time
@@ -90,11 +90,12 @@ type PhotoUrl struct {
 type Review struct {
 	ID       int    `json:"id" gorm:"primaryKey"`
 	UserID   int    `json:"user_id,omitempty"`
-	User     User   `json:"user,omitempty" gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
+	User     User   `json:"user,omitempty" gorm:"constraint:OnUpdate:SET NULL,OnDelete:SET NULL;"`
 	OfficeID int    `json:"office_id,omitempty"`
-	Office   Office `json:"office,omitempty" gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
+	Office   Office `json:"office,omitempty" gorm:"constraint:OnUpdate:SET NULL,OnDelete:SET NULL;"`
 	Star     int    `json:"star"`
 	Text     string `json:"text"`
+	Hidden   int    `json:"hidden" gorm:"default:0"`
 }
 
 /*

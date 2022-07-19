@@ -15,8 +15,8 @@ func (rs *reviewService) CreateReviewService(review model.Review) (id int, err e
 	return rs.repo.CreateReview(review)
 }
 
-func (rs *reviewService) GetReviewsService() (reviews []model.Review, err error) {
-	return rs.repo.GetReviews()
+func (rs *reviewService) GetReviewsService(review model.Review) (reviews []model.Review, err error) {
+	return rs.repo.GetReviews(review)
 }
 
 func (rs *reviewService) GetReviewByIDService(id int) (review model.Review, err error) {

@@ -31,8 +31,18 @@ func (sc *ReviewServiceController) CreateReviewController(c echo.Context) error 
 
 //get all review
 func (sc *ReviewServiceController) GetReviewsController(c echo.Context) error {
-	reviews, err := sc.ReviewServ.GetReviewsService()
+	review := model.Review{}
+	hidden, err := strconv.Atoi(c.QueryParam("hidden"))
+	if err == nil {
+		review.Hidden = hidden
+	}
 
+	office_id, err := strconv.Atoi(c.QueryParam("office_id"))
+	if err == nil {
+		review.OfficeID = office_id
+	}
+
+	reviews, err := sc.ReviewServ.GetReviewsService(review)
 	if err != nil {
 		return c.JSONPretty(http.StatusInternalServerError, model.Response{
 			Code:    http.StatusInternalServerError,

@@ -45,7 +45,7 @@ type OfficeServiceAdapter interface {
 
 type ReviewServiceAdapter interface {
 	CreateReviewService(review model.Review) (id int, err error)
-	GetReviewsService() (reviews []model.Review, err error)
+	GetReviewsService(review model.Review) (reviews []model.Review, err error)
 	GetReviewByIDService(id int) (review model.Review, err error)
 	UpdateReviewService(review model.Review, id int) error
 	DeleteReviewService(id int) error

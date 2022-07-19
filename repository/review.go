@@ -19,8 +19,9 @@ func (r *repoReview) CreateReview(review model.Review) (id int, err error) {
 }
 
 //Gett all booking
-func (r *repoReview) GetReviews() (reviews []model.Review, err error) {
+func (r *repoReview) GetReviews(review model.Review) (reviews []model.Review, err error) {
 	if err = r.DB.Debug().
+		Where(&review).
 		Preload(clause.Associations).
 		Find(&reviews).
 		Error; err != nil {

@@ -45,7 +45,7 @@ type OfficeRepoAdapter interface {
 
 type ReviewRepoAdapter interface {
 	CreateReview(review model.Review) (id int, err error)
-	GetReviews() (reviews []model.Review, err error)
+	GetReviews(review model.Review) (reviews []model.Review, err error)
 	GetReviewByID(id int) (review model.Review, err error)
 	UpdateReview(review model.Review, id int) error
 	DeleteReview(id int) error
