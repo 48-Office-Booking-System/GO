@@ -5,6 +5,7 @@ go 1.18
 require gorm.io/gorm v1.23.6
 
 require (
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible // indirect
 	github.com/go-sql-driver/mysql v1.6.0 // indirect
 	github.com/gorilla/websocket v1.4.1 // indirect
 	github.com/labstack/gommon v0.3.1 // indirect
