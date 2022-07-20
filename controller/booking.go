@@ -56,6 +56,11 @@ func (sc *BookingServiceController) GetBookingsController(c echo.Context) error 
 		booking.StatusID = status_id
 	}
 
+	user_id, err := strconv.Atoi(c.QueryParam("user_id"))
+	if err == nil {
+		booking.UserID = user_id
+	}
+
 	bookings, err := sc.BookingServ.GetBookingsService(booking)
 
 	if err != nil {
