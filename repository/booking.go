@@ -21,7 +21,7 @@ func (r *repoBooking) CreateBooking(booking model.Booking) (id int, err error) {
 		return 0, err
 	}
 
-	booking.EndDate, err = time.Parse(hourFormat, booking.EndDateString)
+	booking.EndDate, err = time.Parse(dateFormat, booking.EndDateString)
 	if err != nil {
 		return 0, err
 	}
