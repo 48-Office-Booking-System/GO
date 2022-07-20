@@ -11,8 +11,8 @@ import (
 	"gorm.io/gorm/clause"
 )
 
-const dateFormat string = "2006-01-02"
-const hourFormat string = "15:04:05 WIB"
+const dateFormat string = "2006-01-02 15:04:05 WIB"
+const hourFormat string = "2006-01-02 15:04:05 WIB"
 
 //create booking
 func (r *repoBooking) CreateBooking(booking model.Booking) (id int, err error) {
