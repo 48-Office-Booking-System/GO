@@ -4,10 +4,6 @@ import (
 	"KOBA/config"
 
 	"github.com/dgrijalva/jwt-go"
-	echo "github.com/labstack/echo"
-	"github.com/labstack/echo/v4"
-	"github.com/labstack/echo/v4/middleware"
-	"github.com/labstack/middleware"
 )
 
 func CreateToken(userId int, name string) (string, error) {
