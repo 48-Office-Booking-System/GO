@@ -37,24 +37,24 @@ type Office struct {
 }
 
 type Booking struct {
-	ID              int    `json:"id" gorm:"primaryKey"`
-	UserID          int    `json:"user_id,omitempty"`
-	User            User   `json:"user,omitempty" gorm:"constraint:OnUpdate:SET NULL,OnDelete:SET NULL;"`
-	OfficeID        int    `json:"office_id,omitempty"`
-	Office          Office `json:"office,omitempty" gorm:"constraint:OnUpdate:SET NULL,OnDelete:SET NULL;"`
-	StatusID        int    `json:"status_id,omitempty"`
-	Status          Status `json:"status" gorm:"constraint:OnUpdate:SET NULL,OnDelete:SET NULL;"`
-	StartDateString string `json:"start_date" gorm:"-"`
-	EndDateString   string `json:"end_date" gorm:"-"`
-	StartDate       time.Time
-	EndDate         time.Time
-	StartHourString string `json:"start_hour" gorm:"-"`
-	EndHourString   string `json:"end_hour" gorm:"-"`
-	StartHour       time.Time
-	EndHour         time.Time
-	DurationInHour  int    `json:"duration_in_hour"`
-	TotalPrice      int    `json:"total_price"`
-	BuktiPembayaran string `json:"bukti_pembayaran"`
+	ID              int       `json:"id" gorm:"primaryKey"`
+	UserID          int       `json:"user_id,omitempty"`
+	User            User      `json:"user,omitempty" gorm:"constraint:OnUpdate:SET NULL,OnDelete:SET NULL;"`
+	OfficeID        int       `json:"office_id,omitempty"`
+	Office          Office    `json:"office,omitempty" gorm:"constraint:OnUpdate:SET NULL,OnDelete:SET NULL;"`
+	StatusID        int       `json:"status_id,omitempty"`
+	Status          Status    `json:"status" gorm:"constraint:OnUpdate:SET NULL,OnDelete:SET NULL;"`
+	StartDateString string    `json:"start_date" gorm:"-"`
+	EndDateString   string    `json:"end_date" gorm:"-"`
+	StartDate       time.Time `json:"-"`
+	EndDate         time.Time `json:"-"`
+	StartHourString string    `json:"start_hour" gorm:"-"`
+	EndHourString   string    `json:"end_hour" gorm:"-"`
+	StartHour       time.Time `json:"-"`
+	EndHour         time.Time `json:"-"`
+	DurationInHour  int       `json:"duration_in_hour"`
+	TotalPrice      int       `json:"total_price"`
+	BuktiPembayaran string    `json:"bukti_pembayaran"`
 }
 
 type Role struct {
